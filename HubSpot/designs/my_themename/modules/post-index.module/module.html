@@ -1,0 +1,139 @@
+{%- import '/themename/templates/partials/components/bl_index/index.html'
+  as bl_index
+-%}
+
+{%- set items = [] -%}
+
+{%- if module.content_type == 'manual' -%}
+  {%- macro return_ttl(str) -%}
+    {%- set arr = str|regex_replace('^-+ ?', '')|split('#') -%}
+    {{ arr|first }}
+  {%- endmacro -%}
+
+  {%- macro return_href(str) -%}
+    {%- set arr = str|regex_replace('^-+ ?', '')|split('#') -%}
+    {{ '#' + arr|last }}
+  {%- endmacro -%}
+
+  {#
+    - 項目1#項目1のid属性値
+    -- 項目1-1#項目1-1のid属性値
+    -- 項目1-2#項目1-2のid属性値
+    --- 項目1-2-1#項目1-2-1のid属性値（最大深度）
+
+    の形式からbl_indexのitemsのディクショナリを生成する
+  #}
+  {%- for item in module.link_list|split('\n') -%}
+    {% if item is string_startingwith "- " %}
+      {%- set ttl = return_ttl(item)|trim -%}
+      {%- set href = return_href(item)|trim -%}
+      {%- do items.append({
+        link: {
+          href: href
+        },
+        ttl: {
+          cont: ttl
+        },
+        children: []
+      }) -%}
+    {%- endif -%}
+
+    {%- if item is string_startingwith "-- " -%}
+      {%- set ttl = return_ttl(item)|trim -%}
+      {%- set href = return_href(item)|trim -%}
+      {%- set lv1last = items|last -%}
+      {%- do lv1last.children.append({
+        link: {
+          href: href
+        },
+        ttl: {
+          cont: ttl,
+        },
+        children: []
+      }) -%}
+    {%- endif -%}
+
+    {%- if item is string_startingwith "--- " -%}
+      {%- set ttl = return_ttl(item)|trim -%}
+      {%- set href = return_href(item)|trim -%}
+      {%- set lv1last = items|last -%}
+      {%- set lv2last = lv1last.children|last -%}
+      {%- do lv2last.children.append({
+        link: {
+          href: href
+        },
+        ttl: {
+          cont: ttl
+        }
+      }) -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- macro return_href(str) -%}
+    {# idが設定されている前提 #}
+    {%- if str is containing ' id="' -%}
+      {{ '#' + str|regex_replace('.+id="(.+)".+', '$1') }}
+    {%- endif -%}
+  {%- endmacro -%}
+  {# for_index_contentは親テンプレート依存 #}
+  {%- for item in for_index_content|split('\n') -%}
+    {% if item is string_startingwith "<h2" %}
+      {%- set href = return_href(item)|trim -%}
+      {%- if href -%}
+        {%- do items.append({
+          link: {
+            href: href
+          },
+          ttl: {
+            cont: item|striptags
+          },
+          children: []
+        }) -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if module.depth >= 3 -%}
+      {%- if item is string_startingwith "<h3" -%}
+        {%- set href = return_href(item)|trim -%}
+        {%- if href -%}
+          {%- set lv1last = items|last -%}
+          {%- do lv1last.children.append({
+            link: {
+              href: href
+            },
+            ttl: {
+              cont: item|striptags
+            },
+            children: []
+          }) -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if module.depth >= 4 -%}
+      {%- if item is string_startingwith "<h4" -%}
+        {%- set href = return_href(item)|trim -%}
+        {%- if href -%}
+          {%- set lv1last = items|last -%}
+          {%- set lv2last = lv1last.children|last -%}
+          {%- do lv2last.children.append({
+            link: {
+              href: href
+            },
+            ttl: {
+              cont: item|striptags
+            }
+          }) -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- set ex_class = module.move_to_more ? 'js_index' : '' -%}
+{{ bl_index.mcr({
+  root: {
+    class: ex_class,
+  },
+  items: items
+}) }}

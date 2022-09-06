@@ -1,0 +1,48 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+-->
+{%- macro code(data) -%}
+  <ul class="bl_horizShareBtns">
+    <li class="bl_horizShareBtns_item">
+      <a href="//www.facebook.com/sharer.php?u={{ content.absolute_url|urlencode }}"
+         data-sns="facebook"
+         class="bl_horizShareBtns_btn bl_horizShareBtns_btn__fb js_shareBtn">
+        <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M27 13.5C27 6.04415 20.9558 0 13.5 0C6.04415 0 0 6.04415 0 13.5C0 20.2381 4.93673 25.8232 11.3906 26.836V17.4023H7.96289V13.5H11.3906V10.5258C11.3906 7.14234 13.4061 5.27344 16.4898 5.27344C17.9669 5.27344 19.5117 5.53711 19.5117 5.53711V8.85938H17.8095C16.1325 8.85938 15.6094 9.90009 15.6094 10.9677V13.5H19.3535L18.755 17.4023H15.6094V26.836C22.0633 25.8232 27 20.2381 27 13.5Z"
+                fill="white"/>
+        </svg>
+        <span>シェア</span>
+      </a>
+    </li>
+    <li class="bl_horizShareBtns_item">
+      <a href="//twitter.com/share?text={{ page_meta.html_title
+      |striptags
+      |urlencode }}&amp;url={{ content.absolute_url|urlencode }}"
+         data-sns="twitter"
+         class="bl_horizShareBtns_btn bl_horizShareBtns_btn__tw js_shareBtn">
+        <svg width="30" height="25" viewBox="0 0 30 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.4344 24.3766C20.7552 24.3766 26.9472 14.9974 26.9472 6.86376C26.9472 6.59736 26.9472 6.33216 26.9292 6.06816C28.1338 5.19686 29.1736 4.11802 30 2.88216C28.8767 3.37992 27.685 3.70636 26.4648 3.85056C27.7497 3.08134 28.7113 1.87149 29.1708 0.44616C27.9626 1.16311 26.6408 1.66838 25.2624 1.94016C24.3344 0.953382 23.107 0.299962 21.7702 0.081016C20.4335 -0.13793 19.0618 0.0898038 17.8675 0.728977C16.6731 1.36815 15.7228 2.38313 15.1634 3.61685C14.6041 4.85057 14.4669 6.23424 14.7732 7.55376C12.3261 7.43108 9.93216 6.79516 7.74677 5.68727C5.56138 4.57938 3.6334 3.02429 2.088 1.12296C1.30091 2.47796 1.05984 4.082 1.41387 5.60849C1.76791 7.13498 2.69043 8.46916 3.9936 9.33936C3.01409 9.31033 2.05594 9.0461 1.2 8.56896C1.2 8.59416 1.2 8.62056 1.2 8.64696C1.20039 10.068 1.69231 11.4452 2.59234 12.5449C3.49236 13.6446 4.74508 14.3992 6.138 14.6806C5.23184 14.9277 4.2811 14.9638 3.3588 14.7862C3.75211 16.0092 4.51784 17.0787 5.54888 17.8451C6.57993 18.6115 7.82474 19.0364 9.1092 19.0606C6.92968 20.7735 4.23727 21.7034 1.4652 21.7006C0.975484 21.6996 0.486245 21.67 0 21.6118C2.81476 23.4181 6.0899 24.3762 9.4344 24.3718"
+                fill="white"/>
+        </svg>
+        <span>ツイート</span>
+      </a>
+    </li>
+  </ul>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{ code(data)|cut('\n')|regex_replace(' {2,}', ' ') }}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}
+
+{%- require_js -%}
+  <script>
+    (function () {
+      {%- include './script.js' -%}
+    })();
+  </script>
+{%- end_require_js -%}

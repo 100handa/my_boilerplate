@@ -1,0 +1,58 @@
+{#
+  {
+    root,
+    items: [
+      {
+        q,
+        a
+      }
+    ]
+  }
+#}
+{%- macro code(data) -%}
+  {%- set json_ld = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: []
+  } -%}
+
+  <dl class="bl_faq {{ data.root.class }}">
+    {%- for item in data.items -%}
+      <dt class="bl_faq_q">
+        <span class="bl_faq_icon">Q</span>
+        <span class="bl_faq_q_txt">{{ item.q.cont }}</span>
+      </dt>
+      <dd class="bl_faq_a">
+        <span class="bl_faq_icon">A</span>
+        <div class="bl_faq_a_body">
+          <div class="bl_faq_a_txt {{ item.a.class }}">
+            {{ item.a.cont }}
+          </div>
+          <!-- /.bl_faq_a_txt -->
+        </div>
+        <!-- /.bl_faq_a_body -->
+      </dd>
+
+      {%- do json_ld.mainEntity.append({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a
+        }
+      }) -%}
+    {%- endfor -%}
+  </dl>
+
+  {%- require_js -%}
+    <script type="application/ld+json">{{ json_ld|tojson }}</script>
+  {%- end_require_js -%}
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

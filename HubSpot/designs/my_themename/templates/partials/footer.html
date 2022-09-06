@@ -1,0 +1,3 @@
+<script src="{{ get_asset_url('/themename/js/script.js') }}"></script>
+{{ standard_footer_includes|cut('\n')|regex_replace(' {2,}', ' ') }}
+{%- module "structured_data" path="/themename/modules/structured-data", no_wrapper=True -%}

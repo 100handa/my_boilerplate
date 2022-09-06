@@ -1,0 +1,13 @@
+{
+  "label": "フッター",
+  "global": true,
+  "icon": "file-alt",
+  "host_template_types": ["PAGE", "BLOG_POST", "BLOG_LISTING"],
+    "css_assets" : [ {
+    "autoload" : true,
+    "path" : "../../css/style.css",
+    "name" : "style.css"
+  } ],
+  "js_assets": [],
+  "is_available_for_new_content": false
+}

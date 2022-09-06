@@ -1,0 +1,22 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_function' as *;
+
+.bl_index,
+.bl_wysiwyg .bl_index {
+  padding: 20px;
+  background-color: $c_base;
+}
+
+.bl_index_ttl,
+.bl_wysiwyg .bl_index_ttl {
+  margin-top: 0;
+  font-size: pxToRem(22);
+  font-weight: bold;
+}
+
+.bl_index_list {
+  padding-left: 1em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  list-style-type: decimal;
+}

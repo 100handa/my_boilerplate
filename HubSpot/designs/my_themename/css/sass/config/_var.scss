@@ -1,0 +1,56 @@
+// -------------------------------------------------------------------
+// Variables
+// -------------------------------------------------------------------
+
+// Systems
+// -------------------------------------------------------------------
+$assetsRoot: '//cdn2.hubspot.net/hubfs/PORTAL_ID';
+$imgRoot: $assetsRoot + '/themename/img';
+
+// Generals
+// -------------------------------------------------------------------
+$contSpaceValue: 15;
+$contSpace: $contSpaceValue + px;
+$innerContWidthValue: 1040;
+$contWidth: $innerContWidthValue + $contSpaceValue * 2 + px;
+
+//
+//Media-queries
+//
+$breakpoints: (
+  's': 375,
+  'm': 768,
+);
+
+// Colors
+// -------------------------------------------------------------------
+$c_accent: #9b8056;
+$c_theme: #e25c00;
+$c_base: #f4f4f4;
+$c_txt: #222;
+
+// Semantic Colors
+// -------------------------------------------------------------------
+
+// Texts
+// -------------------------------------------------------------------
+$ff_en: serif;
+$ff_num: sans-serif;
+$ff_base: sans-serif;
+$ff_serif: serif;
+$fz_base: 1rem;
+$fz_base__sp: 0.75rem;
+$lht_base: 1.5;
+
+// Interactions
+// -------------------------------------------------------------------
+
+//
+//Fiter
+//
+$hoverContrast: 1.5;
+
+//
+//Transition
+//
+$transSpeed: 0.25s;

@@ -1,0 +1,293 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  enableDomainStylesheets: false
+  label: 汎用テンプレート
+-->
+{%- import "/themename/templates/partials/macros/pad-vert-helpers.html" as pad_vert_helpers -%}
+{%- extends '/themename/templates/layouts/1col.html' %}
+
+{%- block content -%}
+  {%- module "settings" path="/themename/modules/page-settings", label="ページ設定", export_to_template_context=True -%}
+
+  {%- macro sect_attr(data) -%}
+    {%- set class = [] -%}
+    {%- if data.bg_color == 'base' -%}
+      {%- do class.append('hp_bgcBase') -%}
+    {%- endif -%}
+
+    {%- set style = [] -%}
+    {%- if data.bg_img.src -%}
+      {%- do style.append('background-image: url({{ data.bg_img.src }})') -%}
+      {%- do class.append('hp_sectBgImg') -%}
+
+      {%- if data.bg_style == 'cover' -%}
+        {%- do style.append('background-size: cover;') -%}
+      {%- elif  data.bg_style == 'repeat' -%}
+        {%- do style.append('background-repeat: repeat;') -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {{ 'class="' + class|join(' ') + '" style="' + style|join(';') + '"' }}
+  {%- endmacro -%}
+
+  {%- macro sect_class(data) -%}
+    {%- set class = data.width == 'default'
+      ? ['ly_cont']
+      : []
+    -%}
+    {{ class|join(' ') }}
+  {%- endmacro -%}
+
+  {%- macro inner_class(data) -%}
+    {%- if data.pad_vert == 'default' -%}
+      bl_sect
+    {%- elif data.pad_vert == 'free' -%}
+      {{ pad_vert_helpers.mcr(data.free_pad_vert, data.free_pad_vert_sp)|trim }}
+    {%- endif -%}
+  {%- endmacro -%}
+
+  <div id="fv" {{ sect_attr(widget_data.settings.fv) }}>
+    <div class="{{ sect_class(widget_data.settings.fv) }}">
+      <section class="{{ inner_class(widget_data.settings.fv) }}">
+        {%- dnd_area "fv", label="ファーストビュー" -%}
+          {%- dnd_section -%}
+            {%- dnd_module path="/themename/modules/main-visual" -%}
+            {%- end_dnd_module -%}
+          {%- end_dnd_section -%}
+          {%- dnd_section -%}
+            {%- dnd_module path="/themename/modules/breadcrumb" -%}
+            {%- end_dnd_module -%}
+          {%- end_dnd_section -%}
+        {%- end_dnd_area -%}
+      </section>
+      <!-- /.bl_sect -->
+    </div>
+    <!-- /.ly_cont -->
+  </div>
+
+  {%- if widget_data.settings.sections|length >= 1 -%}
+    <div id="sect1" {{ sect_attr(widget_data.settings.sections[0]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[0]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[0]) }}">
+          {%- dnd_area "sect1", label="セクション1" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 2 -%}
+    <div id="sect2" {{ sect_attr(widget_data.settings.sections[1]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[1]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[1]) }}">
+          {%- dnd_area "sect2", label="セクション2" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 3 -%}
+    <div id="sect3" {{ sect_attr(widget_data.settings.sections[2]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[2]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[2]) }}">
+          {%- dnd_area "sect3", label="セクション3" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 4 -%}
+    <div id="sect4" {{ sect_attr(widget_data.settings.sections[3]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[3]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[3]) }}">
+          {%- dnd_area "sect4", label="セクション4" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 5 -%}
+    <div id="sect5" {{ sect_attr(widget_data.settings.sections[4]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[4]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[4]) }}">
+          {%- dnd_area "sect5", label="セクション5" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 6 -%}
+    <div id="sect6" {{ sect_attr(widget_data.settings.sections[5]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[5]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[5]) }}">
+          {%- dnd_area "sect6", label="セクション6" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 7 -%}
+    <div id="sect7" {{ sect_attr(widget_data.settings.sections[6]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[6]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[6]) }}">
+          {%- dnd_area "sect7", label="セクション7" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 8 -%}
+    <div id="sect8" {{ sect_attr(widget_data.settings.sections[7]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[7]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[7]) }}">
+          {%- dnd_area "sect8", label="セクション8" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 9 -%}
+    <div id="sect9" {{ sect_attr(widget_data.settings.sections[8]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[8]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[8]) }}">
+          {%- dnd_area "sect9", label="セクション9" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 10 -%}
+    <div id="sect10" {{ sect_attr(widget_data.settings.sections[9]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[9]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[9]) }}">
+          {%- dnd_area "sect10", label="セクション10" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 11 -%}
+    <div id="sect11" {{ sect_attr(widget_data.settings.sections[10]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[10]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[10]) }}">
+          {%- dnd_area "sect11", label="セクション11" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 12 -%}
+    <div id="sect12" {{ sect_attr(widget_data.settings.sections[11]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[11]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[11]) }}">
+          {%- dnd_area "sect12", label="セクション12" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 13 -%}
+    <div id="sect13" {{ sect_attr(widget_data.settings.sections[12]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[12]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[12]) }}">
+          {%- dnd_area "sect13", label="セクション13" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 14 -%}
+    <div id="sect14" {{ sect_attr(widget_data.settings.sections[13]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[13]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[13]) }}">
+          {%- dnd_area "sect14", label="セクション14" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+
+  {%- if widget_data.settings.sections|length >= 15 -%}
+    <div id="sect15" {{ sect_attr(widget_data.settings.sections[14]) }}>
+      <div class="{{ sect_class(widget_data.settings.sections[14]) }}">
+        <section class="{{ inner_class(widget_data.settings.sections[14]) }}">
+          {%- dnd_area "sect15", label="セクション15" -%}
+            {%- dnd_section -%}
+            {%- end_dnd_section -%}
+          {%- end_dnd_area -%}
+        </section>
+        <!-- /.bl_sect -->
+      </div>
+      <!-- /.ly_cont -->
+    </div>
+  {%- endif -%}
+{%- endblock -%}

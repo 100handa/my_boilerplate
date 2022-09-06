@@ -1,0 +1,54 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/convert-line-break-to-br.html" as br -%}
+
+{%- set comp_name= '' -%}
+{%- if module.styles.show_type == 'half' -%}
+  {%- import "/themename/templates/partials/components/bl_halfMedia/index.html" as media -%}
+  {%- set comp_name= 'bl_halfMedia' -%}
+{%- else -%}
+  {%- import "/themename/templates/partials/components/bl_media/index.html" as media -%}
+  {%- set comp_name= 'bl_media' -%}
+{%- endif -%}
+
+{%- set items = [] -%}
+
+{%- set align_class = '' -%}
+{%- if module.styles.align == 'right' -%}
+  {%- set align_class = '{{ comp_name }}__rev' -%}
+{%- endif -%}
+
+{%- for item in module.media_items -%}
+  {%- if module.styles.align == 'alt_left' and loop.index is even -%}
+    {%- set align_class = '{{ comp_name }}__rev' -%}
+  {%- endif -%}
+  {%- if module.styles.align == 'alt_right' and loop.index is odd -%}
+    {%- set align_class = '{{ comp_name }}__rev' -%}
+  {%- endif -%}
+  {%- set ttl = br.mcr(item.ttl) -%}
+
+  {%- do items.append({
+    root: {
+      class: item.ex_class + ' ' + align_class,
+    },
+    img: item.img,
+    ttl: {
+      tag: module.ttl_tag,
+      cont: ttl
+    },
+    txt: {
+      class: 'bl_wysiwyg',
+      cont: item.txt
+    }
+  }) -%}
+
+  {%- if module.styles.align is string_containing 'alt_' -%}
+    {%- set align_class = '' -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{{ media.mcr({
+  root: {
+    class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}'
+  },
+  items: items
+}) }}

@@ -1,0 +1,87 @@
+[
+  {
+    "id": "content_type",
+    "name": "content_type",
+    "label": "表示形式",
+    "default": "menu",
+    "display": "radio",
+    "locked": false,
+    "choices": [
+      [
+        "menu",
+        "自動"
+      ],
+      [
+        "manual",
+        "手動"
+      ]
+    ],
+    "type": "choice",
+    "required": false,
+    "help_text": "自動の場合、HubSpotのメニュー機能に基づいてパンくずリストを出力します"
+  },
+  {
+    "id": "menu",
+    "name": "menu",
+    "label": "メニューの選択",
+    "locked": false,
+    "type": "menu",
+    "required": false,
+    "default": "",
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "menu",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "parent_pages",
+    "name": "parent_pages",
+    "label": "親ページ",
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "help_text": "",
+    "default": [],
+    "occurrence": {
+      "default": 2,
+      "min": null,
+      "max": null,
+      "sorting_label_field": "page"
+    },
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "manual",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    },
+    "tab": "CONTENT",
+    "children": [
+      {
+        "id": "parent_pages.page",
+        "name": "page",
+        "label": "親ページの選択",
+        "default": null,
+        "locked": false,
+        "type": "page",
+        "required": false
+      },
+      {
+        "id": "parent_pages.txt",
+        "name": "txt",
+        "label": "表示ラベル（上書き用）",
+        "default": "",
+        "validation_regex": "",
+        "show_emoji_picker": false,
+        "allow_new_line": false,
+        "locked": false,
+        "type": "text",
+        "required": false,
+        "help_text": ""
+      }
+    ]
+  }
+]

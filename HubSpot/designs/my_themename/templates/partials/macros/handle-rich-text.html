@@ -1,0 +1,63 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: false
+-->
+{%- macro wrap_table_with_class(rich_text, class_name) -%}
+  {%- set rich_text_arr = rich_text|split('\n') -%}
+  {%- set output_arr = [] -%}
+
+  {%- for str in rich_text_arr -%}
+    {%- if str is string_startingwith '<table' -%}
+      {%- set parent_tag = rich_text_arr[loop.index0 - 1] -%}
+      {%- if parent_tag is string_startingwith '<div' -%}
+        {# 親にdivがある場合 #}
+
+        {%- if parent_tag is string_containing 'class="' -%}
+          {# divがclassを含む場合 #}
+          {%- set div_tag = parent_tag|regex_replace('class="([^"]*)"', 'class="$1 {{ class_name }}"')  -%}
+        {%- else -%}
+          {%- set div_tag = parent_tag|replace('<div', '<div class="{{ class_name }}"')  -%}
+        {%- endif -%}
+
+        {%- do output_arr.pop(loop.index0 - 1) -%}
+        {%- do output_arr.append(div_tag) -%}
+        {%- do output_arr.append(str) -%}
+      {%- else -%}
+        {%- do output_arr.append('<div class="{{ class_name }}">' ~ str) -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- if
+        str is string_startingwith '</table'
+        and rich_text_arr[loop.index0 + 1] != '</div>'
+      -%}
+        {# 親にdivがない場合 #}
+        {%- do output_arr.append(str ~ '</div>') -%}
+      {%- else -%}
+        {%- do output_arr.append(str) -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {{ output_arr|join('\n') }}
+{%- endmacro -%}
+
+{%- macro remove_table_style(rich_text) -%}
+  {%- set rich_text_arr = rich_text|split('\n') -%}
+  {%- set output_arr = [] -%}
+
+  {%- for str in rich_text_arr -%}
+    {%- if
+      str is string_startingwith '<table'
+      or str is string_startingwith '<tr'
+      or str is string_startingwith '<th'
+      or str is string_startingwith '<td'
+    -%}
+      {%- set style_removed = str|regex_replace('style="[^"]*"', '') -%}
+      {%- do output_arr.append(style_removed) -%}
+    {%- else -%}
+      {%- do output_arr.append(str) -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {{ output_arr|join('\n') }}
+{%- endmacro -%}

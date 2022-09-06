@@ -1,0 +1,13 @@
+<!--
+  templateType: none
+  isAvailableForNewContent: true
+-->
+{%- macro mcr(data) -%}
+  {%- set attr = 'src="{{ data.src }}"' -%}
+  {%- set attr = data.alt ? attr ~ ' alt="{{ data.alt }}"' : attr ~ ' alt=""' -%}
+  {%- set attr = data.width ? attr ~ ' width="{{ data.width }}"' : attr -%}
+  {%- set attr = data.height ? attr ~ ' height="{{ data.height }}"' : attr -%}
+  {%- set attr = data.class ? attr ~ ' class="{{ data.class }}"' : attr -%}
+  {%- set attr = data.lazy|default(true) ? attr ~ ' loading="lazy"' : attr -%}
+  <img {{ attr }}>
+{%- endmacro -%}

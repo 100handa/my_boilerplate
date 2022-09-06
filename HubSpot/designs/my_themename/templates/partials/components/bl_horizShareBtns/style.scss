@@ -1,0 +1,28 @@
+@use './css/sass/config/_inc' as *;
+
+.bl_horizShareBtns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bl_horizShareBtns_item {
+}
+
+.bl_horizShareBtns_btn {
+  &__tw {
+    path {
+      fill: #1da1f2;
+    }
+  }
+
+  &__fb {
+    path {
+      fill: #1877f2;
+    }
+  }
+
+  svg {
+    margin-right: 10px;
+  }
+}

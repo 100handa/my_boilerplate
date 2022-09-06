@@ -1,0 +1,67 @@
+<!--
+  templateType: search_results_page
+  isAvailableForNewContent: true
+  enableDomainStylesheets: false
+  label: サイト内検索結果
+-->
+
+{%- import "/themename/templates/partials/components/hs-search-result/index.html" as result -%}
+{%- extends '/themename/templates/layouts/1col.html' %}
+
+{%- block content -%}
+  {%- module "ttl" path="/themename/modules/page-title", ttl="“{{ request.query_dict.term }}” の検索結果" -%}
+  <div class="ly_cont">
+    <div class="bl_sect">
+      {{ result.mcr() }}
+      <h2 class="el_lv2Heading">再検索</h2>
+
+      {%- set _groupIds = [] -%}
+      {%- set _domains = [] -%}
+      {%- set _paths = [] -%}
+      {%- for prop in request.query|split('&') -%}
+        {%- set key = prop|split('=')|first -%}
+        {%- set val = prop|split('=')|last -%}
+        {%- if key == 'groupId' -%}
+          {%- do _groupIds.append(val) -%}
+        {%- elif key == 'domain' -%}
+          {%- do _domains.append(val) -%}
+        {%- elif key == 'pathPrefix' -%}
+          {%- do _paths.append(val|replace('%2F', '/')) -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {# 長いので短縮用変数 #}
+      {%- set qs = request.query -%}
+
+      {%- module "search_input"
+        path="/themename/modules/search-input",
+        placeholder="{{ request.query_dict.placeholder }}",
+        limit="{{ request.query_dict.limit }}",
+        property={
+          title: qs is string_containing 'property=title',
+          description: qs is string_containing 'property=description',
+          author_full_name: qs is string_containing 'property=author_full_name',
+          author_handle: qs is string_containing 'property=author_handle',
+          tag: qs is string_containing 'property=tag',
+          html: qs is string_containing 'property=html',
+        },
+        target_strategy="{{ request.query_dict.strategy }}",
+        groupId="{{ _groupIds }}",
+        type={
+          site_page: qs is string_containing 'type=SITE_PAGE',
+          landing_page: qs is string_containing 'type=LANDING_PAGE',
+          listing_page: qs is string_containing 'type=LISTING_PAGE',
+          blog_post: qs is string_containing 'type=BLOG_POST',
+          knowledge_article: qs is string_containing 'type=KNOWLEDGE_ARTICLE',
+        },
+        target_domains_and_paths={
+          domain: _domains,
+          paths: _paths,
+          matchPrefix: qs is string_containing 'matchPrefix=false' ? false : true
+        }
+      -%}
+    </div>
+    <!-- /.bl_sect -->
+  </div>
+  <!-- /.ly_cont -->
+{%- endblock -%}

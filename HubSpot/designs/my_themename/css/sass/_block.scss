@@ -1,0 +1,96 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+
+.bl_sect {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  @include lastMB0();
+  @include MQ() {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+}
+
+.bl_wysiwyg {
+  margin-bottom: 40px;
+  @include MQ() {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  h1 {
+    @include el_lv1Heading();
+  }
+
+  h2 {
+    @include el_lv2Heading();
+  }
+
+  h3 {
+    @include el_lv3Heading();
+  }
+
+  h4 {
+    @include el_lv4Heading();
+  }
+
+  h5 {
+    @include el_lv5Heading();
+  }
+
+  h6 {
+    @include el_lv6Heading();
+  }
+
+  blockquote {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: $c_base;
+  }
+
+  pre {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: $c_base;
+  }
+
+  p {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    @include MQ() {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  ul {
+    padding-left: 1em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    list-style-type: disc;
+  }
+
+  ol {
+    padding-left: 1em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    list-style-type: decimal;
+  }
+}

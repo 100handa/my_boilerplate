@@ -1,0 +1,70 @@
+[
+  {
+    "default": "manual",
+    "display": "radio",
+    "name": "content_type",
+    "id": "content_type",
+    "label": "表示形式",
+    "locked": false,
+    "choices": [
+      ["manual", "手動"],
+      ["auto", "自動"]
+    ],
+    "type": "choice",
+    "required": false,
+    "help_text": "いずれの場合も最大3階層までです。自動の場合、id属性のある見出しを対象とします"
+  },
+  {
+    "id": "depth",
+    "name": "depth",
+    "label": "出力する見出しレベル（Hxタグ）の深さ",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "display": "slider",
+    "min": 2,
+    "max": 4,
+    "step": 1,
+    "type": "number",
+    "default": 4,
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "auto",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "link_list",
+    "name": "link_list",
+    "label": "項目リスト",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "placeholder": "- 項目1#項目1のid属性値",
+    "allow_new_line": true,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "- 項目1#項目1のid属性値\n-- 項目1-1#項目1-1のid属性値\n-- 項目1-2#項目1-2のid属性値\n--- 項目1-2-1#項目1-2-1のid属性値（最大深度）\n- 項目2#項目2のid属性値\n-- 項目2-1#項目2-1のid属性値\n-- 項目2-2#項目2-2のid属性値",
+    "help_text": "",
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "manual",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "move_to_more",
+    "name": "move_to_more",
+    "label": "「続きを読む」セパレーター（More）の位置に挿入する",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true
+  }
+]

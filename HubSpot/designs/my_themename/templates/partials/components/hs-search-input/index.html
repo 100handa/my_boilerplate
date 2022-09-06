@@ -1,0 +1,97 @@
+{#
+  placeholder: String,
+  limit: Number,
+  property: {
+    title: Boolean,
+    description: Boolean,
+    author_full_name: Boolean,
+    author_handle: Boolean,
+    tag: Boolean,
+    html: Boolean,
+  },
+  target_strategy: String('blog' or 'customize')
+  groupId: [Number]Array
+  type: {
+    site_page: Booelan,
+    landing_page: Booelan,
+    listing_page: Booelan,
+    blog_post: Booelan,
+    knowledge_article: Booelan,
+  }
+  target_domains_and_paths: {
+    domain: [String]Array
+    paths: [String]Array
+  }
+#}
+{%- macro code(data) -%}
+  <div class="hs-search-field">
+    <div class="hs-search-field__bar">
+      <form action="/{{ site_settings.content_search_results_page_path }}">
+        <input type="text" class="hs-search-field__input" name="term" autocomplete="off" aria-label="検索" placeholder="{{ data.placeholder }}">
+
+        {# ==========================================================================
+          共通
+          ========================================================================== #}
+        {%- for key, val in data.property.items() -%}
+          {%- if val -%}
+            <input type="hidden" name="property" value="{{ key }}">
+          {%- endif -%}
+        {%- endfor -%}
+        <input type="hidden" name="limit" value="{{ data.limit }}">
+
+        {# ==========================================================================
+          ブログのみの場合
+          ========================================================================== #}
+        {%- if data.target_strategy == 'blog' -%}
+          {%- if not data.groupId|length -%}
+            ブログを選択してください
+          {%- endif -%}
+          {%- for blog_id in data.groupId -%}
+            <input type="hidden" name="groupId" value="{{ blog_id }}">
+          {%- endfor -%}
+        {%- endif -%}
+
+        {# ==========================================================================
+          その他の場合
+          ========================================================================== #}
+        {%- if data.target_strategy == 'customize' -%}
+          {%- for key, val in data.type.items() -%}
+            {%- if val -%}
+              <input type="hidden" name="type" value="{{ key|upper }}">
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- for domain in data.target_domains_and_paths.domain -%}
+            <input type="hidden" name="domain" value="{{ domain }}">
+          {%- endfor -%}
+          {%- for path in data.target_domains_and_paths.paths -%}
+            <input type="hidden" name="pathPrefix" value="{{ path }}">
+          {%- endfor -%}
+          {%- if
+            data.target_domains_and_paths.paths|length
+            and not data.target_domains_and_paths.matchPrefix
+          -%}
+            <input type="hidden" name="matchPrefix" value="false">
+          {%- endif -%}
+        {%- endif -%}
+
+        {# 検索結果の再検索UIで表示する用 #}
+        <input type="hidden" name="placeholder" value="{{ data.placeholder }}">
+        <input type="hidden" name="strategy" value="{{ data.target_strategy }}">
+      </form>
+    </div>
+    <ul class="hs-search-field__suggestions"></ul>
+  </div>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}
+
+{%- require_js -%}
+  <script>{%- include './script.js' -%}</script>
+{%- end_require_js -%}

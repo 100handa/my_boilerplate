@@ -1,0 +1,40 @@
+{#
+  {
+    root,
+    items: [
+      {
+        ttl,
+        txt
+      }
+    ]
+  }
+#}
+{%- macro code(data) -%}
+  <dl class="bl_accordion {{ data.root.class }} js_accordion">
+    {%- for item in data.items -%}
+      <dt>
+        <button class="bl_accordion_btn js_accordion_ttl" type="button">
+          {{ item.ttl.cont }}
+        </button>
+      </dt>
+      <dd class="bl_accordion_body js_accordion_body">
+        <div class="bl_accordion_txt {{ item.txt.class }}">
+          {{ item.txt.cont }}
+        </div>
+        <!-- /.bl_accordion_txt -->
+      </dd>
+    {%- endfor -%}
+  </dl>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}
+
+{%- require_js -%}
+  <script>{%- include './script.js' -%}</script>
+{%- end_require_js -%}

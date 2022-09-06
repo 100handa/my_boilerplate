@@ -1,0 +1,21 @@
+<!--
+  templateType: error_page
+  isAvailableForNewContent: true
+  enableDomainStylesheets: false
+  label: 404
+-->
+
+{%- extends '/themename/templates/layouts/1col.html' %}
+
+{%- block content -%}
+  {%- module "ttl" path="/themename/modules/page-title", ttl="404 Not Found" -%}
+  <div class="ly_cont">
+    <div class="bl_sect">
+      <p>ページが見つかりませんでした。URLが正しいかご確認ください。</p>
+      <h2 class='el_lv2Heading'>サイト内検索</h2>
+      {%- module "search_input" path="/themename/modules/search-input" -%}
+    </div>
+    <!-- /.bl_sect -->
+  </div>
+  <!-- /.ly_cont -->
+{%- endblock -%}

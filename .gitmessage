@@ -1,0 +1,13 @@
+feat/fix/docs/refactor/perf/style: コミットメッセージ
+
+# feat: 新機能開発
+# fix: バグフィックス
+# docs: ドキュメント編集など
+# refactor: リファクタリング
+# perf: パフォーマンス向上
+# style: コードスタイルに関すること
+# test: テストに関すること
+# revert: コミット取り消し
+# build: ビルドに関すること
+# ci: ciに関すること
+# chore: カテゴライズできない雑事

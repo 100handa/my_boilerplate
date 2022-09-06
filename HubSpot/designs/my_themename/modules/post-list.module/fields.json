@@ -1,0 +1,210 @@
+[
+  {
+    "id": "content_type",
+    "name": "content_type",
+    "display": "radio",
+    "label": "表示形式",
+    "locked": false,
+    "choices": [
+      [
+        "manual",
+        "手動"
+      ],
+      [
+        "blog",
+        "ブログ"
+      ]
+    ],
+    "type": "choice",
+    "default": "blog",
+    "required": false
+  },
+  {
+    "id": "blog",
+    "name": "blog",
+    "label": "ブログの設定",
+    "type": "group",
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "blog.blog_id",
+        "name": "blog_id",
+        "label": "ブログの選択",
+        "default": null,
+        "locked": false,
+        "type": "blog",
+        "required": false,
+        "help_text": "",
+        "visibility": {
+          "controlling_field": "content_type",
+          "access": null,
+          "controlling_value_regex": "blog",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "blog.tag",
+        "name": "tag",
+        "label": "絞り込むタグ",
+        "default": null,
+        "tag_value": "SLUG",
+        "locked": false,
+        "type": "tag",
+        "required": false,
+        "help_text": "",
+        "visibility": {
+          "controlling_field": "content_type",
+          "access": null,
+          "controlling_value_regex": "blog",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "blog.show_num",
+        "name": "show_num",
+        "label": "表示件数",
+        "default": 8,
+        "min": 1,
+        "step": 1,
+        "display": "text",
+        "locked": false,
+        "type": "number",
+        "required": false,
+        "visibility": {
+          "controlling_field": "content_type",
+          "access": null,
+          "controlling_value_regex": "blog",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      }
+    ]
+  },
+  {
+    "id": "manual_contents",
+    "name": "manual_contents",
+    "label": "コンテンツ",
+    "default": [],
+    "tab": "CONTENT",
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "manual",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    },
+    "occurrence": {
+      "default": 3,
+      "min": 1,
+      "max": null,
+      "sorting_label_field": "cont.ttl"
+    },
+    "children": [
+      {
+        "id": "manual_contents.link",
+        "name": "link",
+        "label": "リンク先",
+        "default": {
+          "open_in_new_tab": false,
+          "no_follow": false,
+          "url": {
+            "content_id": null,
+            "href": "",
+            "type": "CONTENT"
+          }
+        },
+        "locked": false,
+        "type": "link",
+        "required": false,
+        "supported_types": [
+          "EXTERNAL",
+          "FILE",
+          "EMAIL_ADDRESS"
+        ]
+      },
+      {
+        "id": "manual_contents.date",
+        "name": "date",
+        "label": "日付",
+        "default": null,
+        "locked": false,
+        "type": "date",
+        "required": false
+      },
+      {
+        "id": "manual_contents.tag",
+        "name": "tag",
+        "label": "タグ",
+        "validation_regex": "",
+        "allow_new_line": true,
+        "show_emoji_picker": false,
+        "default": "タグ1\nタグ2",
+        "locked": false,
+        "type": "text",
+        "required": false,
+        "help_text": "改行区切りで複数指定します"
+      },
+      {
+        "id": "manual_contents.ttl",
+        "name": "ttl",
+        "label": "タイトル",
+        "default": "タイトルが入ります",
+        "validation_regex": "",
+        "allow_new_line": false,
+        "show_emoji_picker": false,
+        "placeholder": "",
+        "locked": false,
+        "type": "text",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

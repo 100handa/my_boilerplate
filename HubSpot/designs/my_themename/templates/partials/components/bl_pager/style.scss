@@ -1,0 +1,44 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+
+.bl_pager {
+  display: flex;
+  overflow-x: auto;
+}
+
+.bl_pager_inner {
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+
+  > *:last-child {
+    margin-right: 0;
+  }
+
+  > li {
+    margin-right: 15px;
+  }
+}
+
+.bl_pager_link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  color: $c_theme;
+  text-decoration: none;
+  border: 1px solid currentColor;
+  transition: 0.25s;
+
+  @include FH() {
+    color: #fff;
+    background-color: $c_theme;
+    opacity: 0.75;
+  }
+
+  &.is_active {
+    color: #fff;
+    pointer-events: none;
+    background-color: $c_theme;
+  }
+}

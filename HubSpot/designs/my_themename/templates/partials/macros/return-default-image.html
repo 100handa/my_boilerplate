@@ -1,0 +1,4 @@
+{# テンプレート側のサイト設定モジュール読み込みに依存 #}
+{%- macro mcr(src) -%}
+  {{- src ? src : widget_data.site_settings.image.og_image.src }}
+{%- endmacro -%}

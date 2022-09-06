@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cont",
+    "name": "cont",
+    "label": "コンテンツ",
+    "default": "<table>\n<tbody>\n<tr>\n<th>見出しが入ります</th>\n<td>テキストが入ります</td>\n</tr>\n<tr>\n<th>見出しが入ります</th>\n<td>テキストが入ります</td>\n</tr>\n<tr>\n<th>見出しが入ります</th>\n<td>テキストが入ります</td>\n</tr>\n<tr>\n<th>見出しが入ります</th>\n<td>テキストが入ります</td>\n</tr>\n</tbody>\n</table>",
+    "locked": false,
+    "type": "richtext",
+    "required": false,
+    "help_text": ""
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

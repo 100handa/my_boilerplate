@@ -1,0 +1,9 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+  -->
+{%- macro mcr(lg, md) -%}
+  {%- set class = lg ? 'hp_mt' + lg : '' -%}
+  {%- set class = class + ' md_mt' + md -%}
+  {{ class }}
+{%- endmacro -%}

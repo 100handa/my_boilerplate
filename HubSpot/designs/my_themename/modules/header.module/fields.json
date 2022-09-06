@@ -1,0 +1,182 @@
+[
+  {
+    "id": "logo",
+    "name": "logo",
+    "label": "ロゴの設定",
+    "type": "group",
+    "inline_help_text": "",
+    "help_text": "サイトトップの場合（ページURLがドメインと一致する場合）は、h1で括る処理をしています",
+    "children": [
+      {
+        "id": "logo.img",
+        "name": "img",
+        "label": "画像の選択",
+        "required": false,
+        "locked": false,
+        "responsive": false,
+        "resizable": true,
+        "type": "image",
+        "show_loading": false,
+        "default": {
+          "src": "http://placehold.jp/200x70.png?text=%E3%83%AD%E3%82%B4",
+          "alt": null,
+          "width": null,
+          "height": null
+        },
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "link",
+        "name": "link",
+        "label": "リンク先の設定",
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "FILE",
+          "EMAIL_ADDRESS"
+        ],
+        "type": "link",
+        "default": {
+          "url": {
+            "type": "CONTENT"
+          }
+        },
+        "inline_help_text": "",
+        "help_text": ""
+      }
+    ]
+  },
+  {
+    "id": "btn_type",
+    "name": "btn_type",
+    "label": "ボタンタイプ",
+    "sortable": false,
+    "required": true,
+    "locked": false,
+    "display": "radio",
+    "choices": [
+      [
+        "manual",
+        "手動"
+      ],
+      [
+        "cta",
+        "CTA"
+      ]
+    ],
+    "type": "choice",
+    "default": "manual",
+    "help_text": "",
+    "inline_help_text": ""
+  },
+  {
+    "id": "btns",
+    "name": "btns",
+    "label": "ボタンの設定",
+    "locked": false,
+    "type": "group",
+    "tab": "CONTENT",
+    "required": false,
+    "help_text": "",
+    "inline_help_text": "",
+    "occurrence": {
+      "min": null,
+      "max": null,
+      "sorting_label_field": "btn.txt",
+      "default": null
+    },
+    "children": [
+      {
+        "id": "btn.link",
+        "name": "link",
+        "label": "リンク",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "FILE",
+          "EMAIL_ADDRESS"
+        ],
+        "type": "link",
+        "default": {
+          "url": {
+            "type": "CONTENT"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        },
+        "help_text": "",
+        "inline_help_text": ""
+      },
+      {
+        "id": "btn.txt",
+        "name": "txt",
+        "label": "ボタンテキスト",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "placeholder": "",
+        "allow_new_line": true,
+        "show_emoji_picker": false,
+        "type": "text",
+        "default": "タイトルが入ります",
+        "help_text": "",
+        "inline_help_text": "",
+        "visibility": {
+          "controlling_field": "btn_type",
+          "access": null,
+          "controlling_value_regex": "manual",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      }
+    ],
+    "default": [],
+    "visibility": {
+      "controlling_field": "btn_type",
+      "access": null,
+      "controlling_value_regex": "manual",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "ctas",
+    "name": "ctas",
+    "label": "CTAの選択",
+    "required": false,
+    "locked": false,
+    "type": "cta",
+    "default": null,
+    "help_text": "",
+    "inline_help_text": "",
+    "occurrence": {
+      "min": null,
+      "max": null,
+      "sorting_label_field": "",
+      "default": null
+    },
+    "visibility": {
+      "controlling_field": "btn_type",
+      "access": null,
+      "controlling_value_regex": "cta",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "nav",
+    "name": "nav",
+    "label": "ナビゲーションの選択",
+    "required": false,
+    "locked": false,
+    "type": "menu",
+    "default": null,
+    "help_text": "",
+    "inline_help_text": ""
+  }
+]

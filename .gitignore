@@ -1,0 +1,11 @@
+Thumbs.db
+.DS_Store
+npm-debug.log
+node_modules
+build
+dest
+*.min.js
+*.map
+.idea
+.vscode
+hubspot.config.yml

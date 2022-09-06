@@ -1,0 +1,9 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/convert-line-break-to-br.html" as br -%}
+
+{%- macro code() -%}
+  <h{{ module.lv }} class="el_lv{{ module.style }}Heading {{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}">
+    {{ br.mcr(module.ttl) }}
+  </h{{ module.lv }}>
+{%- endmacro -%}
+{{ code()|cut('\n')|regex_replace(' {2,}', ' ') }}

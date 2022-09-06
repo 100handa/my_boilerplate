@@ -1,0 +1,37 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/components/bl_card/index.html" as bl_card -%}
+{%- import "/themename/templates/partials/components/bl_pager/index.html" as bl_pager -%}
+
+<div class="{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}">
+  {%- if tag -%}
+    <h2 class="el_lv2Heading">{{ tag }}の記事</h2>
+  {%- elif blog_author -%}
+    <h2 class="el_lv2Heading">{{ blog_author.display_name }}の記事</h2>
+  {%- endif -%}
+
+  {%- set items = [] -%}
+  {%- for cont in contents -%}
+    {%- do items.append({
+      root: {
+        href: cont.absolute_url
+      },
+      img: {
+        alt: cont.name,
+        src: cont.featured_image
+      },
+      ttl: {
+        cont: cont.name
+      },
+      txt: {
+        cont: cont.metaDescription|truncate(80, '...')
+      }
+    }) -%}
+  {%- endfor -%}
+  {{ bl_card.mcr({
+    unit: {
+      col_num: 2
+    },
+    items: items
+  }) }}
+  {{ bl_pager.mcr() }}
+</div>

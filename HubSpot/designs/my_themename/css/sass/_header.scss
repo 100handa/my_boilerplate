@@ -1,0 +1,271 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+@use './css/sass/config/_function' as *;
+
+.ly_header {
+  padding-top: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.ly_header_inner {
+  @include contentCentering();
+  box-sizing: border-box;
+}
+
+.bl_headerUtils {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+
+  .el_btn {
+    width: auto;
+    padding: 10px 20px;
+    box-shadow: none;
+  }
+}
+
+.bl_headerUtils_btns {
+  display: flex;
+}
+
+.bl_headerNav {
+  display: flex;
+  justify-content: space-around;
+  @include MQ(m) {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    z-index: -1;
+    display: block;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    transition: $transSpeed;
+  }
+
+  &.is_show {
+    @include MQ(m) {
+      top: 49.5px;
+      z-index: 975;
+      padding-bottom: 55px; // MEMO: スクロールできない場合あるのでメニュー一つ分の高さを確保しておく
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.bl_headerNav_item {
+  position: relative;
+  flex-grow: 1;
+  margin-left: 30px;
+  text-align: center;
+  @include MQ(m) {
+    margin-left: 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.3);
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &.bl_headerNav_item__hasChild {
+    position: relative;
+  }
+}
+
+.bl_headerNav_link {
+  position: relative;
+  display: block;
+  padding: 17px 0;
+  font-size: pxToRem(15);
+  line-height: 1.3;
+  color: $c_txt;
+  text-decoration: none;
+  letter-spacing: 0.75px;
+  @include MQ(m) {
+    padding: 17px 14px;
+  }
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    content: '';
+    background-color: currentColor;
+    opacity: 0;
+    transition: 0.25s;
+    @include MQ(m) {
+      display: none;
+    }
+  }
+
+  @include FH() {
+    &:after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+
+  &.is_current {
+    &:after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+}
+
+.bl_headerChildNav {
+  $wrp: '.bl_headerChildNav';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  width: 224px;
+  visibility: hidden;
+  background-color: #fff;
+  opacity: 0;
+  transition: 0.25s;
+  transform: translateY(-8px);
+  @include MQ(m) {
+    position: static;
+    display: none;
+    width: 100%;
+    visibility: visible;
+    background-color: rgba(238, 238, 238, 0.1);
+    opacity: 1;
+    transition: none;
+    transform: none;
+  }
+
+  .is_lastChildMenu & {
+    right: 0;
+    left: auto;
+  }
+
+  .bl_headerNav_item__hasChild:hover & {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bl_headerChildNav_item {
+  border-bottom: 1px solid rgba(204, 204, 204, 0.7);
+  @include MQ(m) {
+    border-top: 1px solid rgba(238, 238, 238, 0.3);
+    border-bottom: none;
+  }
+}
+
+.bl_headerChildNav_link {
+  display: block;
+  padding: 10px;
+  font-family: $ff_serif;
+  font-size: pxToRem(14);
+  line-height: 20px;
+  color: currentColor;
+  text-align: left;
+  text-decoration: none;
+  letter-spacing: 0.7px;
+  transition: 0.25s;
+  @include MQ(m) {
+    padding: 17px 14px;
+    font-size: pxToRem(15);
+    color: #fff;
+  }
+
+  &:before {
+    @include MQ(m) {
+      margin-right: 6px;
+      content: '-';
+    }
+  }
+
+  @include FH() {
+    text-decoration: underline;
+    opacity: 0.8;
+    @include MQ(m) {
+      text-decoration: none;
+    }
+  }
+}
+
+.bl_headerSpBtn {
+  display: none;
+  @include MQ(m) {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    display: block;
+    width: 20px;
+    height: 19px;
+    cursor: pointer;
+    background-color: $c_accent;
+    border: 0;
+  }
+
+  &.is_open {
+    .bl_headerSpBtn_line {
+      @include MQ(m) {
+        transition: $transSpeed;
+      }
+
+      &:nth-of-type(1) {
+        @include MQ(m) {
+          transform: translateY(8px) rotateZ(45deg);
+        }
+      }
+
+      &:nth-of-type(2) {
+        @include MQ(m) {
+          opacity: 0;
+          transform: translateX(5px);
+        }
+      }
+
+      &:nth-of-type(3) {
+        @include MQ(m) {
+          transform: translateY(-10px) rotateZ(-45deg);
+        }
+      }
+    }
+  }
+}
+
+.bl_headerSpBtn_line {
+  @include MQ(m) {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: $transSpeed;
+  }
+
+  &:nth-of-type(1) {
+    @include MQ(m) {
+      top: 0;
+      left: 0;
+    }
+  }
+
+  &:nth-of-type(2) {
+    @include MQ(m) {
+      top: 9px;
+      left: 0;
+    }
+  }
+
+  &:nth-of-type(3) {
+    @include MQ(m) {
+      top: 18px;
+      left: 0;
+    }
+  }
+}

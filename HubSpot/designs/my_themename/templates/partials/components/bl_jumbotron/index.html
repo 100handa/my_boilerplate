@@ -1,0 +1,39 @@
+{#
+  {
+    root,
+    ttl,
+    img,
+    img_sp
+  }
+#}
+{%- macro code(data) -%}
+{%- require_head -%}
+  <link rel="preload" href="{{ data.img.src }}" as="image">
+  <link rel="preload" href="{{ data.img_sp.src }}" as="image">
+{%- end_require_head -%}
+
+  <div class="bl_jumbotron {{ data.root.class }}">
+    <p class="bl_jumbotron_inner"><em class="bl_jumbotron_ttl">{{ data.ttl.cont }}</em></p>
+  </div>
+  <!-- /.bl_jumbotron -->
+  {%- require_css -%}
+    <style>
+      .bl_jumbotron.{{ data.root.class|replace(' ', '.') }} {
+        background-image: url('{{ data.img.src }}');
+      }
+      @media screen and (max-width: 768px) {
+        .bl_jumbotron.{{ data.root.class|replace(' ', '.') }} {
+          background-image: url('{{ data.img_sp.src }}');
+        }
+      }
+    </style>
+  {%- end_require_css -%}
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

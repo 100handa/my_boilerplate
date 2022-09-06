@@ -1,0 +1,66 @@
+@use './css/sass/config/_mixin' as *;
+
+.bl_mediaUnit {
+  > * {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.bl_media {
+  display: flex;
+  align-items: center;
+  @include MQ() {
+    display: block;
+  }
+}
+
+.bl_media_imgWrapper {
+  flex: 0 1 27.58333%;
+  margin-right: 3.33333%;
+  @include MQ() {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  > img {
+    width: 100%;
+  }
+}
+
+.bl_media_body {
+  flex: 1;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bl_media_ttl {
+  margin-bottom: 10px;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.bl_media__rev {
+  @at-root {
+    .bl_media#{&} {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .bl_media_imgWrapper {
+    margin-right: 0;
+  }
+
+  .bl_media_body {
+    margin-right: 3.33333%;
+    text-align: right;
+    @include MQ() {
+      margin-right: 0;
+    }
+  }
+}

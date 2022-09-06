@@ -1,0 +1,81 @@
+[
+  {
+    "id": "list",
+    "name": "list",
+    "label": "リスト",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "placeholder": "",
+    "allow_new_line": true,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "リスト1\nリスト2",
+    "help_text": "改行区切りで複数入力します。リンクとしたい場合はaタグで括ってください。"
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "show_type",
+        "name": "show_type",
+        "label": "表示形式",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "inline",
+            "後ろ詰め"
+          ],
+          [
+            "col2",
+            "2カラム"
+          ]
+        ],
+        "type": "choice",
+        "default": "inline",
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

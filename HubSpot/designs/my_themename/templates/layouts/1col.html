@@ -1,0 +1,26 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: false
+-->
+{%- block head -%}
+  {%- include '/themename/templates/partials/head.html' -%}
+{%- endblock -%}
+
+{%- block header -%}
+  {%- module "header" path="/themename/modules/header", no_wrapper=True -%}
+{%- endblock -%}
+
+<body>
+  <main>
+    <article>
+      {%- block content -%}
+      {%- endblock -%}
+    </article>
+  </main>
+
+{%- block footer -%}
+  {%- module "footer" path="/themename/modules/footer", no_wrapper=True -%}
+  {%- include '/themename/templates/partials/footer.html' -%}
+{%- endblock -%}
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "label": "サイト内検索",
+  "content_tags" : [ {
+    "name" : "SEARCH",
+    "source" : "MARKETPLACE"
+  }, {
+    "name" : "COMPATIBLE_BLOG",
+    "source" : "MARKETPLACE"
+  }, {
+    "name" : "COMPATIBLE_PAGE",
+    "source" : "MARKETPLACE"
+  } ],
+  "global" : false,
+  "icon" : "https://static.hsappstatic.net/cms-default-modules/static-1.143/img/icon/edited-search.svg",
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 6733882,
+  "is_available_for_new_content" : true
+}

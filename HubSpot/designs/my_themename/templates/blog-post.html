@@ -1,0 +1,64 @@
+<!--
+  templateType: blog_post
+  isAvailableForNewContent: true
+  enableDomainStylesheets: false
+  label: ブログ（記事）
+-->
+{%- extends '/themename/templates/layouts/2col.html' -%}
+{%- import "/themename/templates/partials/components/bl_card/index.html" as bl_card -%}
+{%- import "/themename/templates/partials/components/bl_horizShareBtns/index.html" as bl_horizShareBtns -%}
+{%- import "/themename/templates/partials/macros/cook-cont.html" as cook_cont -%}
+{%- from "/themename/templates/partials/macros/handle-rich-text.html" import wrap_table_with_class, remove_table_style -%}
+
+{%- block main -%}
+  {%- module "post_settings" path="/themename/modules/blog-post-settings", export_to_template_context=true -%}
+
+  {%- set date = content.publish_date_localized -%}
+  <time datetime="{{ date|replace('/', '-') }}">{{ date }}</time>
+    {%- for topic in content.topic_list -%}
+      <a class="el_label" href="{{ blog_tag_url('default', topic.slug) }}">{{ topic.name }}</a>
+    {%- endfor -%}
+  <h1 class="el_lv2Heading hp_mt0">{{ content.name|striptags }}</h1>
+  {%- if content.featured_image -%}
+    <figure>
+      <img src="{{ content.featured_image }}" alt="{{ content.name|striptags }} サムネイル画像">
+    </figure>
+  {%- endif -%}
+
+  <div class="bl_wysiwyg">
+    {%- set cooked_cont = cook_cont.mcr(content.post_body) -%}
+
+    {%- if widget_data.post_settings.add_id_attr -%}
+      {%- import "/themename/templates/partials/macros/add-id-to-headings.html" as add_id_to_headings -%}
+      {%- set cooked_cont = add_id_to_headings.mcr(cooked_cont) -%}
+    {%- endif -%}
+    {%- set for_index_content = cooked_cont -%}
+    {%- module "index" path="/themename/modules/post-index", label="目次" -%}
+
+    {%- if
+      widget_data.post_settings.table_style != 'rich_text'
+      and widget_data.post_settings.remove_table_style
+    -%}
+      {%- set cooked_cont = remove_table_style(cooked_cont) -%}
+    {%- endif -%}
+
+    {%- if widget_data.post_settings.table_style == 'common' -%}
+      {%- import "/themename/templates/partials/components/bl_crossTable/index.html" as bl_crossTable -%}
+      {{ wrap_table_with_class(cooked_cont, 'bl_crossTable') }}
+    {%- else -%}
+      {{ cooked_cont }}
+    {%- endif -%}
+  </div>
+  <!-- /.bl_wysiwyg -->
+
+  {{ bl_horizShareBtns.mcr() }}
+
+  <p class="hp_tar">執筆者：<a href="{{ blog_author_url('default', content.blog_post_author.slug) }}">{{ content.blog_post_author.display_name }}</a></p>
+
+  <h2 class="el_lv3Heading">関連記事</h2>
+  {%- module "relative_posts" path="/themename/modules/card", label="関連記事（カード）", content_type="relative_posts" -%}
+{%- endblock -%}
+
+{%- block aside -%}
+  {%- include '/themename/templates/partials/blog-side.html' -%}
+{%- endblock -%}

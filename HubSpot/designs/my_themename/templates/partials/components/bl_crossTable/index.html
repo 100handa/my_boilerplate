@@ -1,0 +1,14 @@
+{%- macro code(data) -%}
+  <div class="bl_crossTable {{ data.root.class }}">
+    {{ data.root.cont }}
+  </div>
+  <!-- /.bl_crossTable -->
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

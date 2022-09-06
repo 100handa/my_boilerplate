@@ -1,0 +1,104 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/convert-line-break-to-br.html" as br -%}
+{%- import "/themename/templates/partials/macros/handle-link-obj.html" as hlo -%}
+{%- import "/themename/templates/partials/components/bl_card/index.html" as bl_card -%}
+
+{%- if module.content_type == 'relative_posts' -%}
+  {%- set relative_posts = [] -%}
+    {%- macro relative_posts_formatter(post, index, count) -%}
+      {%- do relative_posts.append({
+        root: {
+          href: post.absolute_url
+        },
+        img: {
+          alt: post.name|striptags,
+          src: post.featured_image
+        },
+        ttl: {
+          cont: post.name|striptags,
+          tag: 'h3'
+        },
+        txt: {
+          cont: post.metaDescription
+        }
+      }) -%}
+      {%- if index == count -%}
+        {{ bl_card.mcr({
+          unit: {
+            col_num: module.styles.col_num,
+          },
+          items: relative_posts
+        }) }}
+      {%- endif -%}
+    {%- endmacro -%}
+    {# TODO: post_formatterをcallbackに変更 #}
+    {%- related_blog_posts tags=content.topic_list, post_formatter="relative_posts_formatter" -%}
+{%- else -%}
+  {%- set items = [] -%}
+
+  {%- if module.content_type == 'blog' -%}
+    {%- set cards = module.blog.tag
+      ? blog_recent_tag_posts(module.blog.blog_id, module.blog.tag, module.blog.show_num)
+      : blog_recent_posts(module.blog.blog_id, module.blog.show_num)
+    -%}
+    {%- for item in cards -%}
+      {%- do items.append({
+        root: {
+          href: item.absolute_url
+        },
+        img: {
+          alt: item.name,
+          src: item.featured_image
+        },
+        ttl: {
+          tag: module.ttl_tag,
+          cont: item.name
+        },
+        txt: {
+          class: 'bl_wysiwyg',
+          cont: item.metaDescription
+        }
+      }) -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- for item in module.cards -%}
+      {%- set href = hlo.return_href(item.link) -%}
+      {%- set attr = hlo.return_attr(item.link) -%}
+      {%- set ttl = br.mcr(item.ttl) -%}
+      {%- do items.append({
+        root: {
+          class: item.ex_class,
+          attr: attr,
+          href: href,
+        },
+        img: {
+          alt: item.img.alt,
+          src: item.img.src
+        },
+        ttl: {
+          tag: module.ttl_tag,
+          cont: ttl
+        },
+        txt: {
+          class: 'bl_wysiwyg',
+          cont: item.txt
+        }
+      }) -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if items|length -%}
+    {{ bl_card.mcr({
+      root: {
+        class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}',
+      },
+      unit: {
+        col_num: module.styles.col_num,
+      },
+      items: items
+    }) }}
+  {%- else -%}
+    記事がありません
+  {%- endif -%}
+{%- endif -%}
+{# module.content_type == 'relative_posts' #}

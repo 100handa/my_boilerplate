@@ -1,0 +1,30 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import '/themename/templates/partials/components/bl_bulletList/index.html'
+  as bl_bulletList
+-%}
+
+{%- set mod_class = module.styles.show_type == 'inline'
+  ? 'bl_bulletList__inline'
+  : 'bl_bulletList__col2'
+-%}
+
+{%- set items = [] -%}
+{%- for item in module.list|split('\n') -%}
+  {%- do items.append({
+    list_item: {
+      cont: item
+    }
+  }) -%}
+{%- endfor -%}
+
+{{
+  bl_bulletList.mcr({
+    root: {
+      class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}',
+    },
+    list_wrapper: {
+      class: mod_class
+    },
+    items: items
+  })
+}}

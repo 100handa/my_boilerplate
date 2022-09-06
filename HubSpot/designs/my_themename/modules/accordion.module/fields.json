@@ -1,0 +1,88 @@
+[
+  {
+    "id": "accordions",
+    "tab": "CONTENT",
+    "label": "コンテンツ",
+    "name": "accordions",
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "default": [],
+    "occurrence": {
+      "default": 2,
+      "min": 1,
+      "max": null,
+      "sorting_label_field": "accordions.ttl"
+    },
+    "children": [
+      {
+        "id": "accordions.ttl",
+        "name": "ttl",
+        "label": "タイトル",
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "allow_new_line": true,
+        "show_emoji_picker": true,
+        "type": "text",
+        "default": "タイトルが入ります",
+        "placeholder": "",
+        "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;",
+        "help_text": ""
+      },
+      {
+        "id": "accordions.txt",
+        "name": "txt",
+        "label": "自由入力コンテンツ",
+        "required": false,
+        "locked": false,
+        "type": "richtext",
+        "default": "<p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</p>",
+        "inline_help_text": "",
+        "help_text": ""
+      }
+    ]
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+@use './css/sass/config/_mixin' as *;
+
+.ly_cont {
+  $wrp: '.ly_cont';
+  @include contentCentering();
+
+  &.ly_cont__col {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    @include MQ() {
+      flex-direction: column;
+      padding-top: 35px;
+      padding-bottom: 35px;
+    }
+  }
+}
+
+.ly_cont_main {
+  flex: 1;
+  margin-right: 3.25203%;
+  @include MQ() {
+    margin-right: 0;
+    margin-bottom: 60px;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+}
+
+.ly_cont_side {
+  flex: 0 0 260px;
+  &.ly_cont_side__wide {
+    flex: 0 0 360px;
+  }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+}

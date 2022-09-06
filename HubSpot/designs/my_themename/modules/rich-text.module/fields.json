@@ -1,0 +1,94 @@
+[
+  {
+    "id": "cont",
+    "name": "cont",
+    "label": "コンテンツ",
+    "required": false,
+    "locked": false,
+    "type": "richtext",
+    "default": "<h1>見出し1</h1>\n<h2>見出し2</h2>\n<h3>見出し3</h3>\n<h4>見出し4</h4>\n<h5>見出し5</h5>\n<h6>見出し6</h6>\n<p>\n  段落の文章が入ります<br>\n  <a href=\"#\">リンク</a><br>\n  <strong>太字</strong><br>\n  <em>斜体</em>\n</p>\n<ul>\n  <li>順序なしリスト1</li>\n  <li>順序なしリスト2</li>\n  <li>順序なしリスト3</li>\n</ul>\n<ol>\n  <li>順序ありリスト1</li>\n  <li>順序ありリスト2</li>\n  <li>順序ありリスト3</li>\n</ol>\n<table>\n  <thead>\n  <tr>\n    <th>見出し</th>\n    <th>見出し</th>\n    <th>見出し</th>\n    <th>見出し</th>\n  </tr>\n  </thead>\n  <tbody>\n  <tr>\n    <th>タイトルが入ります</th>\n    <td>テキストが入ります</td>\n    <td>テキストが入ります</td>\n    <td>テキストが入ります</td>\n  </tr>\n  <tr>\n    <th>タイトルが入ります</th>\n    <td>テキストが入ります</td>\n    <td>テキストが入ります</td>\n    <td>テキストが入ります</td>\n  </tr>\n  <tr>\n    <th>タイトルが入ります</th>\n    <td>テキストが入ります</td>\n    <td>テキストが入ります</td>\n    <td>テキストが入ります</td>\n  </tr>\n  </tbody>\n</table>\n<blockquote>引用の文章が入ります</blockquote>\n<pre>コードなどの整形対象テキストが入ります</pre>",
+    "help_text": ""
+  },
+  {
+    "id": "table_style",
+    "name": "table_style",
+    "label": "テーブル表示タイプ",
+    "required": true,
+    "locked": false,
+    "display": "radio",
+    "choices": [
+      [
+        "common",
+        "標準スタイル"
+      ],
+      [
+        "rich_text",
+        "この画面で見た目を調整する"
+      ]
+    ],
+    "type": "choice",
+    "default": "common",
+    "inline_help_text": "",
+    "help_text": ""
+  },
+  {
+    "id": "remove_table_style",
+    "name": "remove_table_style",
+    "label": "テーブルのstyleタグを出力時に取り除く",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true,
+    "help_text": "テーブルの見た目をカスタマイズする場合はオフにします",
+    "visibility": {
+      "controlling_field": "table_style",
+      "access": null,
+      "controlling_value_regex": "rich_text",
+      "hidden_subfields": null,
+      "operator": "NOT_EQUAL"
+    }
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

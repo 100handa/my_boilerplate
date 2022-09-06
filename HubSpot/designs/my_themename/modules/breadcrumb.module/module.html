@@ -1,0 +1,31 @@
+{%- import "/themename/templates/partials/components/hs-breadcrumb-menu/index.html" as hs_breadcrumb_menu -%}
+
+{%- macro code() -%}
+  {%- if module.content_type == 'menu' -%}
+    <div class="ly_cont">
+      {%- menu "breadcrumb" id={{ module.menu }}, root_type='breadcrumb', flyouts='false', max_levels='10', no_wrapper=true -%}
+    </div>
+    <!-- /.ly_cont -->
+  {%- else -%}
+    {%- set parents = [] -%}
+    {% for item in module.parent_pages %}
+      {%- set page = content_by_id(item.page) -%}
+      {%- do parents.append({
+        link: {
+          href: page.absolute_url,
+          cont: item.txt|default(page.html_title, true)
+        }
+      }) -%}
+    {% endfor %}
+    <div class="ly_cont">
+      {{ hs_breadcrumb_menu.mcr({
+        parents: parents,
+        current: {
+          cont: content.html_title
+        }
+      }) }}
+    </div>
+    <!-- /.ly_cont -->
+  {%- endif -%}
+{%- endmacro -%}
+{{ code()|cut('\n')|regex_replace(' {2,}', ' ') }}

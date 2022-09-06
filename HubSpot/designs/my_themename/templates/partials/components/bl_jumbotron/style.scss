@@ -1,0 +1,49 @@
+@use './css/sass/config/_mixin' as *;
+
+.bl_jumbotron {
+  height: calc(69.44444vw + -233.33333px);
+  background-position: center center;
+  background-size: cover;
+  @include MQ(1200, min) {
+    height: 600px;
+  }
+  @include MQ(m) {
+    height: 300px;
+  }
+
+  &_inner {
+    position: relative;
+    max-width: 1230px;
+    height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &_ttl {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: calc(1.81818vw + 14.18182px);
+    font-style: normal;
+    line-height: 1.5;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%);
+    @include MQ(1200, min) {
+      font-size: 2.25rem;
+    }
+
+    @include MQ(m) {
+      left: 50%;
+      width: 90%;
+      padding: 15px;
+      font-size: 1.25rem;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

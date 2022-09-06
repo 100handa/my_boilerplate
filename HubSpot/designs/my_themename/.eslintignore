@@ -1,0 +1,6 @@
+# node
+node_modules/
+
+# minified
+**/*.min.js
+smooth-scroll-polyfills.js

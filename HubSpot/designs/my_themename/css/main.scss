@@ -1,0 +1,13 @@
+// カスタムモジュールに含まれない、一般的なスタイルを記述します
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+@use './css/sass/_css-wipe';
+@use './css/sass/_base';
+@use './css/sass/_layout';
+@use './css/sass/_element';
+@use './css/sass/_header';
+@use './css/sass/_footer';
+@use './css/sass/_block';
+@use './css/sass/_hs';
+@use './css/sass/_program';
+@use './css/sass/_helpers';

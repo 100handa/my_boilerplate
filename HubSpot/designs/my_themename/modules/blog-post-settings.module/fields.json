@@ -1,0 +1,53 @@
+[
+  {
+    "id": "add_id_attr",
+    "name": "add_id_attr",
+    "label": "見出しにid属性を自動付与する",
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true,
+    "inline_help_text": "",
+    "help_text": "目次を自動生成する場合、ONにしてください"
+  },
+  {
+      "id": "table_style",
+      "name": "table_style",
+      "label": "テーブル表示タイプ",
+      "required": true,
+      "locked": false,
+      "display": "radio",
+      "choices": [
+        [
+          "common",
+          "標準スタイル"
+        ],
+        [
+          "rich_text",
+          "この画面で見た目を調整する"
+        ]
+      ],
+      "type": "choice",
+      "default": "common",
+      "inline_help_text": "",
+      "help_text": ""
+    },
+    {
+      "id": "remove_table_style",
+      "name": "remove_table_style",
+      "label": "テーブルのstyleタグを出力時に取り除く",
+      "sortable": false,
+      "required": false,
+      "locked": false,
+      "type": "boolean",
+      "default": true,
+      "help_text": "テーブルの見た目をカスタマイズする場合はオフにします",
+      "visibility": {
+        "controlling_field": "table_style",
+        "access": null,
+        "controlling_value_regex": "rich_text",
+        "hidden_subfields": null,
+        "operator": "NOT_EQUAL"
+      }
+    }
+]

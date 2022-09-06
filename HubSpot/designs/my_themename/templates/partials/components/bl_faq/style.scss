@@ -1,0 +1,67 @@
+@use './css/sass/config/_inc' as *;
+
+.bl_faq {
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bl_faq_icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45px;
+  height: 45px;
+  font-weight: normal;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.bl_faq_q,
+.bl_faq_a {
+  position: relative;
+  box-sizing: content-box;
+  display: flex;
+  align-items: flex-start;
+  min-height: 45px;
+  padding-left: 60px;
+}
+
+.bl_faq_q {
+  margin-bottom: 15px;
+  font-size: 1.125rem;
+  font-weight: bold;
+
+  .bl_faq_icon {
+    color: #fff;
+    background-color: #e25c00;
+  }
+}
+
+.bl_faq_q_txt {
+  padding-top: 12px;
+}
+
+.bl_faq_a {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+
+  .bl_faq_icon {
+    color: #e25c00;
+    background: #efefef;
+  }
+}
+
+.bl_faq_a_body {
+  padding-top: 12px;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bl_faq_a_txt {
+  margin-bottom: 20px;
+}

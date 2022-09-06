@@ -1,0 +1,228 @@
+[
+  {
+    "id": "content_type",
+    "name": "content_type",
+    "label": "表示形式",
+    "display": "radio",
+    "locked": false,
+    "choices": [
+      [
+        "manual",
+        "手動"
+      ],
+      [
+        "blog",
+        "ブログ"
+      ],
+      [
+        "relative_posts",
+        "関連記事"
+      ]
+    ],
+    "default": "manual",
+    "type": "choice",
+    "required": false,
+    "help_text": "“関連記事” はブログ記事でのみ使用できます"
+  },
+  {
+    "id": "cards",
+    "name": "cards",
+    "label": "コンテンツ",
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "default": [],
+    "tab": "CONTENT",
+    "occurrence": {
+      "default": 3,
+      "min": null,
+      "max": null,
+      "sorting_label_field": "cards.ttl"
+    },
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "manual",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "id": "cards.link",
+        "name": "link",
+        "label": "リンク先",
+        "locked": false,
+        "type": "link",
+        "required": false,
+        "supported_types": [
+          "EXTERNAL",
+          "FILE",
+          "EMAIL_ADDRESS"
+        ],
+        "default": {
+          "open_in_new_tab": false,
+          "no_follow": false,
+          "url": {
+            "content_id": null,
+            "href": "",
+            "type": "CONTENT"
+          }
+        }
+      },
+      {
+        "id": "cards.img",
+        "name": "img",
+        "label": "画像",
+        "resizable": false,
+        "responsive": false,
+        "locked": false,
+        "type": "image",
+        "required": true,
+        "default": {
+          "src": "http://placehold.jp/640x426.png?text=画像",
+          "alt": "alt属性が入ります"
+        }
+      },
+      {
+        "id": "cards.ttl",
+        "name": "ttl",
+        "label": "タイトル",
+        "default": "タイトルが入ります",
+        "allow_new_line": true,
+        "show_emoji_picker": true,
+        "placeholder": "",
+        "validation_regex": "",
+        "locked": false,
+        "type": "text",
+        "required": false,
+        "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;"
+      },
+      {
+        "id": "cards.txt",
+        "name": "txt",
+        "default": "<p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</p>",
+        "label": "テキスト",
+        "locked": false,
+        "type": "richtext",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "blog",
+    "name": "blog",
+    "label": "ブログの設定",
+    "type": "group",
+    "inline_help_text": "",
+    "help_text": "",
+    "visibility": {
+      "controlling_field": "content_type",
+      "access": null,
+      "controlling_value_regex": "blog",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "id": "blog.blog_id",
+        "name": "blog_id",
+        "label": "ブログの選択",
+        "default": null,
+        "locked": false,
+        "type": "blog",
+        "required": false
+      },
+      {
+        "id": "blog.tag",
+        "name": "tag",
+        "label": "絞り込むタグ",
+        "default": "",
+        "tag_value": "SLUG",
+        "locked": false,
+        "type": "tag",
+        "required": false
+      },
+      {
+        "id": "blog.show_num",
+        "name": "show_num",
+        "label": "表示件数",
+        "display": "text",
+        "min": 1,
+        "step": 1,
+        "default": 8,
+        "locked": false,
+        "type": "number",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "ttl_tag",
+    "name": "ttl_tag",
+    "label": "タイトルのタグ",
+    "default": "h3",
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "placeholder": "",
+    "locked": false,
+    "type": "text",
+    "required": false,
+    "help_text": "h2~h6やpなどを入力してください"
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.col_num",
+        "name": "col_num",
+        "label": "カラム数",
+        "display": "slider",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 3,
+        "locked": false,
+        "type": "number",
+        "required": false
+      },
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

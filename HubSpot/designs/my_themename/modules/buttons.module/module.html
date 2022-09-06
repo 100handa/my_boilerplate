@@ -1,0 +1,31 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/convert-line-break-to-br.html" as br -%}
+{%- import "/themename/templates/partials/macros/handle-link-obj.html" as hlo -%}
+{%- import "/themename/templates/partials/components/bl_horizBtnList/index.html" as bl_horizBtnList -%}
+
+{%- set align_class = 'bl_horizBtnList__alignLeft' -%}
+{%- if module.styles.align == 'center' -%}
+  {%- set align_class = '' -%}
+  {%- elif module.styles.align == 'right' -%}
+  {%- set align_class = 'bl_horizBtnList__alignRight' -%}
+{%- endif -%}
+
+{%- set items = [] -%}
+{%- for item in module.btns -%}
+  {%- if item.content_type == 'cta' -%}
+    {%- do items.append(cta(item.cta)) -%}
+  {%- else -%}
+    {%- set href = hlo.return_href(item.link) -%}
+    {%- set attr = hlo.return_attr(item.link) -%}
+    {%- set txt = br.mcr(item.txt) -%}
+    {%- set btn = '<a class="el_btn ' + item.ex_class + '" href="' + href + '"' + attr + '>' + txt + '</a>' -%}
+    {%- do items.append(btn) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{{ bl_horizBtnList.mcr({
+  root: {
+    class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }} {{ align_class }}',
+  },
+  items: items
+}) }}

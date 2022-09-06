@@ -1,0 +1,36 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+  -->
+{%- macro mcr(cont) -%}
+  {%- macro handle_id(str) -%}
+    {%- if str is string_containing ' id="' -%}
+      {{ str }}
+    {%- else -%}
+      {%- set ttl = str|striptags|e -%}
+      {{ str|regex_replace('<h([1-6])', '<h$1 id="{{ ttl }}"') }}
+    {%- endif -%}
+  {%- endmacro -%}
+
+  {%- set cont_arr = cont|replace('\n', '')|replace('><', '>\n<')|split('\n') -%}
+  {%- set new_arr = [] -%}
+
+  {%- for item in cont_arr -%}
+    {%- if item is string_startingwith '<h1' -%}
+      {%- do new_arr.append(handle_id(item)) -%}
+    {%- elif item is string_startingwith '<h2' -%}
+      {%- do new_arr.append(handle_id(item)) -%}
+    {%- elif item is string_startingwith '<h3' -%}
+      {%- do new_arr.append(handle_id(item)) -%}
+    {%- elif item is string_startingwith '<h4' -%}
+      {%- do new_arr.append(handle_id(item)) -%}
+    {%- elif item is string_startingwith '<h5' -%}
+      {%- do new_arr.append(handle_id(item)) -%}
+    {%- elif item is string_startingwith '<h6' -%}
+      {%- do new_arr.append(handle_id(item)) -%}
+    {%- else -%}
+      {%- do new_arr.append(item) -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {{ new_arr|join('\n') }}
+{%- endmacro -%}

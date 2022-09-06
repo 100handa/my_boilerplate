@@ -1,0 +1,17 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: false
+-->
+{%- macro mcr(blog_id, tag_arr) -%}
+  {%- set tags = [] -%}
+  {%- for tag in tag_arr -%}
+    {%- set href = blog_tag_url(blog_id|default('default', true), tag.slug) -%}
+    {%- do tags.append({
+      link: {
+        href: href
+      },
+      cont: tag.name
+    }) -%}
+  {%- endfor -%}
+  {{ tags|tojson }}
+{%- endmacro -%}

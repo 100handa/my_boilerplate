@@ -1,0 +1,49 @@
+{%- import "/themename/templates/partials/macros/handle-menu-node.html" as hmn -%}
+{#
+  {
+    nav: menu_node
+  }
+#}
+{%- macro code(data) -%}
+  <footer>
+    {%- if data.nav -%}
+      <div class="ly_footer">
+        <div class="ly_footer_inner">
+          <nav>
+            <ul class="bl_footerNav">
+              {%- for lv1 in data.nav.children %}
+                  <li class="
+                    bl_footerNav_item
+                  ">
+                  <{{ hmn.tag(lv1) }} class="bl_footerNav_link" {{ hmn.attr(lv1) }}>{{ lv1.label }}</{{ hmn.tag(lv1) }}>
+                  {%- if lv1.children %}
+                    <ul class="bl_footerChildNav">
+                      {%- for lv2 in lv1.children -%}
+                        <li class="bl_footerChildNav_item">
+                          <{{ hmn.tag(lv2) }} class="bl_footerChildNav_link" {{ hmn.attr(lv2) }}>{{ lv2.label }}</{{ hmn.tag(lv2) }}>
+                        </li>
+                      {%- endfor %}
+                    </ul>
+                  {%- endif %}
+                  </li>
+              {%- endfor %}
+            </ul>
+          </nav>
+        </div>
+        <!-- /.ly_footer_inner -->
+      </div>
+      <!-- /.ly_footer -->
+    {%- endif -%}
+    <div class="ly_footer hp_btGray">
+      <div class="ly_footer_inner">
+        <small class="el_footerCopyright">{{ data.copyright.cont }}</small>
+      </div>
+      <!-- /.ly_footer_inner -->
+    </div>
+    <!-- /.ly_footer hp_btGray -->
+  </footer>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}

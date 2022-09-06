@@ -1,0 +1,14 @@
+<!--
+  templateType: none
+  isAvailableForNewContent: true
+-->
+{%- macro tag(menu_node) -%}
+  {{ menu_node.url ? 'a' : 'span' }}
+{%- endmacro -%}
+
+{%- macro attr(menu_node) -%}
+  {%- set attr = [] -%}
+  {%- do attr.append('href="{{ menu_node.url }}"') if menu_node.url -%}
+  {%- do attr.append('target="_blank"') if menu_node.linkTarget == '_blank' -%}
+  {{ attr|join(' ') }}
+{%- endmacro -%}

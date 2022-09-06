@@ -1,0 +1,47 @@
+[
+  {
+    "id": "img",
+    "name": "img",
+    "label": "画像",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "responsive": false,
+    "resizable": false,
+    "type": "image",
+    "help_text": "背景画像のため、alt属性は不要です",
+    "default": {
+      "src": "http://placehold.jp/1600x900.png?text=画像"
+    }
+  },
+  {
+    "id": "img_sp",
+    "name": "img_sp",
+    "label": "画像（SP）",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "responsive": false,
+    "resizable": false,
+    "type": "image",
+    "help_text": "背景画像のため、alt属性は不要です",
+    "default": {
+      "src": "http://placehold.jp/375x667.png?text=画像"
+    }
+  },
+  {
+    "id": "ttl",
+    "name": "ttl",
+    "label": "タイトル",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "placeholder": "",
+    "allow_new_line": true,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "タイトルが入ります",
+    "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;"
+  }
+]

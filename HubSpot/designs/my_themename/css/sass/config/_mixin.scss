@@ -1,0 +1,198 @@
+@use '_var' as *;
+
+// Modules
+// -------------------------------------------------------------------
+@mixin el_lv1Heading() {
+  padding: 30px 10px;
+  font-size: 1.75rem;
+  color: #fff;
+  text-align: center;
+  background-color: $c_theme;
+
+  > span {
+    position: relative;
+    display: inline-block;
+    transform: translateY(-20%);
+
+    &::after {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 80px;
+      height: 1px;
+      content: '';
+      background-color: currentColor;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@mixin el_lv2Heading() {
+  padding-bottom: 10px;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  font-size: 1.75rem;
+  font-weight: bold;
+  border-bottom: 4px solid $c_theme;
+}
+
+@mixin el_lv3Heading() {
+  padding-bottom: 6px;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid $c_theme;
+}
+
+@mixin el_lv4Heading() {
+  padding-left: 6px;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-left: 2px solid $c_theme;
+}
+
+@mixin el_lv5Heading() {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: $c_theme;
+}
+
+@mixin el_lv6Heading() {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.125rem;
+}
+
+// Utilities
+// -------------------------------------------------------------------
+@mixin LV() {
+  &:link,
+  &:visited {
+    @content;
+  }
+}
+
+@mixin contentCentering() {
+  max-width: $contWidth;
+  padding-right: $contSpace;
+  padding-left: $contSpace;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include MQ() {
+    max-width: 100%;
+  }
+}
+
+@mixin textStyle(
+  $fz: null,
+  $fz2: null,
+  $lht: null,
+  $lht2: null,
+  $pt: null,
+  $pr: null,
+  $pb: null,
+  $pl: null,
+  $mt: null,
+  $mr: null,
+  $mb: null,
+  $ml: null
+) {
+  @if $fz == null {
+    $fz: $fz_base;
+  } @else {
+    font-size: $fz;
+  }
+  @if $lht == null {
+    $lht: $lht_base;
+  } @else {
+    line-height: $lht;
+  }
+
+  @if $pt and $pr and $pb and $pl {
+    @if $pt == $pb and $pr == $pl {
+      padding: autoSpace($pt, $fz, $lht) $pr;
+    } @else if $pr == $pl {
+      padding: autoSpace($pt, $fz, $lht) $pr autoSpace($pb, $fz, $lht);
+    }
+  } @else {
+    padding-top: autoSpace($pt, $fz, $lht);
+    padding-right: $pr;
+    padding-bottom: autoSpace($pb, $fz, $lht);
+    padding-left: $pl;
+  }
+
+  //後続要素もテキストの場合は後続要素のhalfLeadingを考慮する
+  @if $fz2 and $mb {
+    @if $lht2 == null {
+      $lht2: $lht_base;
+    }
+    $mb: autoSpace2($mb, $fz, $fz2, $lht, $lht2);
+  } @else {
+    $mb: autoSpace($mb, $fz, $lht);
+  }
+
+  //-halfLeading指定の場合はhalfLeading分をネガティブマージンで打ち消し
+  @if type-of($mt) == string and str-index($mt, -halfLeading) {
+    $mt: halfLeading($fz, $lht);
+  } @else {
+    $mt: autoSpace($mt, $fz, $lht);
+  }
+
+  @if $mt and $mr and $mb and $ml {
+    @if $mt == $mb and $mr == $ml {
+      margin: $mt $mr;
+    } @else if $mr == $ml {
+      margin: $mt $mr $mb;
+    }
+  } @else {
+    margin-top: $mt;
+    margin-right: $mr;
+    margin-bottom: $mb;
+    margin-left: $ml;
+  }
+}
+
+@mixin lastMB0() {
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin lastMR0() {
+  > *:last-child {
+    margin-right: 0;
+  }
+}
+
+// Interactions
+// -------------------------------------------------------------------
+@mixin FH() {
+  &:focus,
+  &:hover {
+    @content;
+  }
+}
+
+@mixin hoverInteraction() {
+  filter: contrast($hoverContrast);
+}
+
+// MediaQuaries
+// -------------------------------------------------------------------
+@mixin MQ($size: m, $minOrMax: 'max') {
+  // vars.scss内の$breakpointのキーか、数値を直接受け入れる
+  $bp: $size;
+  @if map-has-key($breakpoints, $size) {
+    $bp: map-get($breakpoints, $size);
+  }
+
+  @media screen and (#{$minOrMax}-width: $bp + px) {
+    @content;
+  }
+}

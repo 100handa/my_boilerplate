@@ -1,0 +1,33 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+
+body {
+  font-family: $ff_base;
+  font-weight: 400;
+  line-height: $lht_base;
+  color: $c_txt;
+  font-variant-east-asian: proportional-width;
+  @include MQ() {
+    font-size: $fz_base__sp;
+  }
+}
+
+a {
+  transition: $transSpeed;
+  @include FH() {
+    text-decoration: none;
+  }
+
+  > img {
+    transition: $transSpeed;
+    @include FH() {
+      @include hoverInteraction;
+    }
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: top;
+}

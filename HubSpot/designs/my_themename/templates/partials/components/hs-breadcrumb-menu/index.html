@@ -1,0 +1,39 @@
+{#
+  {
+    root,
+    parents: [
+      {
+        link
+      }
+    ],
+    current
+  }
+#}
+{%- macro code(data) -%}
+  <div class="ly_cont hs-breadcrumb-menu-wrapper {{ data.root.class }}" role="navigation">
+    <ul class="hs-breadcrumb-menu">
+      {%- for item in data.parents -%}
+        <li
+          class="
+          hs-breadcrumb-menu-item
+          {{ 'first-crumb' if loop.first }}
+        ">
+          <a class="hs-breadcrumb-label" href="{{ item.link.href }}" {{ item.link.attr }}>{{ item.link.cont }}</a>
+          <span class="hs-breadcrumb-menu-divider"></span>
+        </li>
+      {%- endfor -%}
+      <li class="hs-breadcrumb-menu-item last-crumb">
+        <span class="hs-breadcrumb-label">{{ data.current.cont }}</span>
+      </li>
+    </ul>
+  </div>
+  <!-- /.hs-breadcrumb-menu-wrapper -->
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

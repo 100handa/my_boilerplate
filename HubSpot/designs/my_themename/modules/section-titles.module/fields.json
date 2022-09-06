@@ -1,0 +1,90 @@
+[
+  {
+    "id": "lv",
+    "name": "lv",
+    "label": "見出しレベル",
+    "sortable": false,
+    "required": true,
+    "locked": false,
+    "display": "slider",
+    "min": 2,
+    "max": 6,
+    "step": 1,
+    "type": "number",
+    "default": 2,
+    "help_text": ""
+  },
+  {
+    "id": "style",
+    "name": "style",
+    "label": "見出しスタイル",
+    "sortable": false,
+    "required": true,
+    "locked": false,
+    "display": "text/slider",
+    "min": 2,
+    "max": 6,
+    "step": 1,
+    "type": "number",
+    "default": 2,
+    "help_text": ""
+  },
+  {
+    "id": "ttl",
+    "name": "ttl",
+    "label": "タイトル",
+    "sortable": false,
+    "required": true,
+    "locked": false,
+    "validation_regex": "",
+    "placeholder": "",
+    "allow_new_line": true,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "タイトルが入ります",
+    "help_text": "",
+    "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;"
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,61 @@
+{#
+  {
+    root
+    items: [
+      {
+        root,
+        date（%Y/%m/%d）,
+        tags: [
+          {
+            link: {
+              href,
+              attr
+            },
+            cont
+          }
+        ],
+        link
+      }
+    ]
+  }
+#}
+{%- macro code(data) -%}
+  <ul class="bl_vertPosts {{ data.root.class }}">
+    {%- for item in data.items -%}
+      <li class="bl_vertPosts_item {{ item.root.class }}">
+        <div class="bl_vertPosts_header">
+          {%- if item.date.cont -%}
+            <time class="bl_vertPosts_date" datetime="{{ item.date.cont|replace('/', '-') }}">{{ item.date.cont }}</time>
+          {%- endif -%}
+          {%- if item.tags -%}
+            <ul class="bl_vertPosts_labels">
+              {%- for tag in item.tags -%}
+                <li>
+                  {%- if tag.link.href -%}
+                    <a href="{{ tag.link.href }}" {{ tag.link.attr }} class="el_label">{{ tag.cont }}</a>
+                  {%- else -%}
+                    <span class="el_label">{{ tag.cont }}</span>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+        <!-- /.bl_vertPosts_header -->
+        <a
+          class="bl_vertPosts_ttl"
+          href="{{ item.link.href }}"
+          {{ item.link.attr }}
+        >{{ item.link.cont }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

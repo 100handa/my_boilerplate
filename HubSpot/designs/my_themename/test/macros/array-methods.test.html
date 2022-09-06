@@ -1,0 +1,58 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+  -->
+{%- from '/themename/templates/partials/macros/lib/array-methods.html' import find, filter, find_index -%}
+
+
+{%- set rec_posts = blog_recent_posts("default", 5) -%}
+{%- for post in rec_posts -%}
+  <p>
+    {{ post.id }}<br>
+    {{ post.name }}<br>
+    {{ post.absolute_url }}<br>
+    {{ post.featured_image }}<br>
+    {{ post.topic_list }}<br>
+  </p>
+{%- endfor -%}
+
+<h2>filter</h2>
+{%- set even_id_posts = filter(rec_posts, 'id', 'even')|fromjson -%}
+even_id_posts:
+{%- for post in even_id_posts -%}
+  <p>
+    {{ post.id }}<br>
+    {{ post.name }}
+  </p>
+{%- endfor -%}
+<br><br>
+
+{%- set sample_posts = filter(rec_posts, 'name', 'string_containing', 'test')|fromjson -%}
+sample_posts:
+{%- for post in sample_posts -%}
+  <p>
+    {{ post.id }}<br>
+    {{ post.name }}
+  </p>
+{%- endfor -%}
+<br><br>
+
+
+<h2>find & find_index</h2>
+by_id:
+{%- set by_id_index = find_index(rec_posts, 'id', 'id', 'equalto', 46906328374)|fromjson -%}
+{%- set by_id = find(rec_posts, 'id', 'equalto', 46906328374)|fromjson -%}
+index{{ by_id_index }}: {{ by_id.id }}
+<br><br>
+
+by_name:
+{%- set by_name_index = find_index(rec_posts, 'id', 'name', 'string_startingwith', 'Outsider')|fromjson -%}
+{%- set by_name = find(rec_posts, 'name', 'string_startingwith', 'Outsider')|fromjson -%}
+index{{ by_name_index }}: {{ by_name.name }}
+<br><br>
+
+nested_param:
+{%- set nested_param_index = find_index(rec_posts, 'id', 'blog_author.email', 'string_containing', 'handa')|fromjson -%}
+{%- set nested_param = find(rec_posts, 'blog_author.email', 'string_containing', 'handa')|fromjson -%}
+index{{ nested_param_index }}: {{ nested_param.blogPostAuthor.email }}
+<br><br>

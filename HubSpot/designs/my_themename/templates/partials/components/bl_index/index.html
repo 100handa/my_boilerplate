@@ -1,0 +1,65 @@
+{#
+  {
+    root,
+    ttl,
+    items: [
+      {
+        link,
+        ttl,
+        children: [
+          {
+            link,
+            ttl,
+            children: [
+              {
+                link,
+                ttl
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+#}
+{%- macro code(data) -%}
+  <div class="bl_index {{ data.root.class }}">
+    <{{ data.ttl.tag|default('h2', true) }} class="bl_index_ttl">目次</{{ data.ttl.tag|default('h2', true) }}>
+    <ol class="bl_index_list">
+      {%- for lv1 in data.items -%}
+        <li>
+          <a href="{{ lv1.link.href }}">{{ lv1.ttl.cont }}</a>
+          {%- if lv1.children -%}
+            <ol>
+              {%- for lv2 in lv1.children -%}
+                <li>
+                  <a href="{{ lv2.link.href }}">{{ lv2.ttl.cont }}</a>
+                  {%- if lv2.children -%}
+                    <ol>
+                      {%- for lv3 in lv2.children -%}
+                        <li><a href="{{ lv3.link.href }}">{{ lv3.ttl.cont }}</a></li>
+                      {%- endfor -%}
+                    </ol>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ol>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+  <!-- /.bl_index -->
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}
+
+{%- require_js -%}
+  <script>{%- include './script.js' -%}</script>
+{%- end_require_js -%}

@@ -1,0 +1,8 @@
+{
+  "label": "ページ設定",
+  "global": false,
+  "icon": "cogs",
+  "host_template_types": ["PAGE", "BLOG_POST", "BLOG_LISTING"],
+  "is_available_for_new_content": false,
+  "inline_help_text": "セクション数変更後、モジュールをドロップするには一度画面をリロードする必要があります。<br><br>各セクションには、数値に応じたid属性値が付いています。<br>例：<br>ファーストビュー→id=\"fv\"<br>セクション1→id=\"sect1\"<br>セクション2→id=\"sect2\""
+}

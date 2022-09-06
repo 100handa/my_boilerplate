@@ -1,0 +1,8 @@
+{
+  "label": "ブログ記事の設定",
+  "global": false,
+  "icon": "cogs",
+  "host_template_types": ["BLOG_POST"],
+  "css_assets" : [],
+  "is_available_for_new_content": true
+}

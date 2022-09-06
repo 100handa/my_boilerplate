@@ -1,0 +1,43 @@
+[
+  {
+    "id": "meta_title_common",
+    "name": "meta_title_common",
+    "label": "<title>タグの共通末尾文字列",
+    "required": false,
+    "locked": false,
+    "allow_new_line": false,
+    "show_emoji_picker": true,
+    "type": "text",
+    "default": "｜キャッチコピー｜会社名",
+    "placeholder": "",
+    "inline_help_text": "",
+    "help_text": "",
+    "validation_regex": ""
+  },
+  {
+    "id": "image",
+    "name": "image",
+    "label": "画像の設定",
+    "type": "group",
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "og_image",
+        "name": "og_image",
+        "label": "共通og:image",
+        "required": false,
+        "locked": false,
+        "responsive": false,
+        "resizable": false,
+        "type": "image",
+        "show_loading": false,
+        "default": {
+          "src": "http://placehold.jp/1600x900.png?text=共通og画像"
+        },
+        "inline_help_text": "",
+        "help_text": "各ページ編集画面の設定にて、画像の指定が無い場合に使用されます（ブログ一覧においては、noimageとしても使用されます）"
+      }
+    ]
+  }
+]

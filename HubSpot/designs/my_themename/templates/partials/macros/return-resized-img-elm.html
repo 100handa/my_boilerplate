@@ -1,0 +1,40 @@
+{%- import "/themename/templates/partials/macros/return-img-elm.html" as img -%}
+
+{#
+  {
+    img: {
+      src: str,
+      alt: str,
+      width: int,
+      height: int
+    },
+    max_width: int
+  }
+#}
+{%- macro mcr(data) -%}
+  {%- if data.max_width < 750 -%}
+    スマホでの綺麗さを保つため、max_widthは750以上で設定してください。750以下でも問題ない場合は、このコードを消してください。
+  {%- endif -%}
+
+  {# 750は375pxのスマホの2@を想定した数字。あまりこれ以下にはしたくない #}
+  {%- set max_width = data.max_width
+    ? data.max_width
+    : 750 -%}
+
+  {%- if data.img.width < max_width -%}
+    {{ img.mcr(data.img) }}
+  {%- else -%}
+    {# ページ編集画面から画像オリジナルのwidth/heightが渡されることを想定し、max_widthで縮小 #}
+    {%- set division_ratio = data.img.width / max_width -%}
+    {%- set resized_height = data.img.height / division_ratio -%}
+
+    {%- set img_elm = {
+      src: data.img.src,
+      width: max_width,
+      height: resized_height|int,
+      class: data.img.class,
+      lazy: data.img.lazy|default(true)
+    } -%}
+    {{ img.mcr(img_elm) }}
+  {%- endif -%}
+{%- endmacro -%}

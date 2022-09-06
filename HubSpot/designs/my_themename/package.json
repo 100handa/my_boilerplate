@@ -1,0 +1,71 @@
+{
+  "name": "themename",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "engines": {
+    "node": "16.13"
+  },
+  "scripts": {
+    "add-precommit-hook": "npx husky add .husky/pre-commit \"echo 'pre-commitフックでエラーが発生する場合は、formatとlintコマンドで先にエラーを解消してください' && cd HubSpot/designs/themename && npm run lint\"",
+    "postinstall": "cd ../../../ && npx husky install HubSpot/designs/themename/.husky && cd HubSpot/designs/themename && npm run add-precommit-hook",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "dev": "run-p watch hs:watch",
+    "start": "run-p watch hs:watch",
+    "watch": "npx gulp",
+    "build": "npx gulp sass && npx gulp babel",
+    "lint": "npx prettier -c \"**/*.{babel.js,scss}\" && npx eslint \"**/*.babel.js\" && npx stylelint \"**/*.scss\"",
+    "format": "npx prettier --write \"**/*.{babel.js,scss}\" && npx eslint --fix \"**/*.babel.js\" && npx stylelint --fix \"**/*.scss\"",
+    "hs:watch": "hs watch ./ themename --disable-initial",
+    "hs:watch:remove": "hs watch ./ themename --disable-initial --remove",
+    "hs:upload:prod": "hs upload ./ themename",
+    "hs:fetch": "hs fetch themename ./ --overwrite",
+    "hs:fetch:all": "hs fetch / ./ --overwrite"
+  },
+  "lint-staged": {
+    "*.{babel.js,scss}": "prettier --write",
+    "*.{babel.js}": "eslint --fix",
+    "*.{scss}": "stylelint --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "autoprefixer": "^10.4.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^5.0.10",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-using": "^0.1.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.3.11",
+    "postcss-reporter": "^7.0.4",
+    "postcss-scss": "^4.0.2",
+    "prettier": "^2.4.1",
+    "sass": "^1.43.4",
+    "stylelint": "^14.0.1",
+    "stylelint-config-standard": "^23.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "stylelint-scss": "^4.0.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4"
+  },
+  "volta": {
+    "node": "16.13.2"
+  }
+}

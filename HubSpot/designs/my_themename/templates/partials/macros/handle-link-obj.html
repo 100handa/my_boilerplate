@@ -1,0 +1,17 @@
+{%- macro return_href(link) -%}
+  {%- set href = link.url.href -%}
+  {%- if link.url.type is equalto "EMAIL_ADDRESS" -%}
+    {%- set href = "mailto:" + href -%}
+  {%- endif -%}
+  {{ href }}
+{%- endmacro -%}
+
+{%- macro return_attr(link) -%}
+  {%- set attr = link.open_in_new_tab
+    ? 'target="_blank"'
+    : '' -%}
+  {%- set attr = link.no_follow
+    ? attr + ' rel="nofollow"'
+    : attr -%}
+  {{ attr }}
+{%- endmacro -%}

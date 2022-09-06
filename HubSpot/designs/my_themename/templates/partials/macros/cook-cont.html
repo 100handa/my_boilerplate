@@ -1,0 +1,11 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+  -->
+{%- macro mcr(txt) -%}
+  {{-
+    txt
+      |regex_replace('loading="lazy"', '')
+      |regex_replace('<(img|iframe)', '<$1 loading="lazy"')
+  -}}
+{%- endmacro -%}

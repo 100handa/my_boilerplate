@@ -1,0 +1,18 @@
+{
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-console": 0
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true,
+    "jquery": true
+  },
+  "globals": {
+    "hbspt": true,
+    "google": true,
+    "SmoothScroll": true,
+    "GMaps": true
+  }
+}

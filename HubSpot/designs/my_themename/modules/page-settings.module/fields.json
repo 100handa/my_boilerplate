@@ -1,0 +1,384 @@
+[
+  {
+    "id": "fv",
+    "name": "fv",
+    "label": "ファーストビューの設定",
+    "required": false,
+    "locked": false,
+    "children": [
+      {
+        "id": "fv.bg_color",
+        "name": "bg_color",
+        "label": "背景色",
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "base",
+            "ベースカラー"
+          ],
+          [
+            "white",
+            "白"
+          ],
+          [
+            "black",
+            "黒"
+          ]
+        ],
+        "type": "choice",
+        "default": "white"
+      },
+      {
+        "id": "fv.width",
+        "name": "width",
+        "label": "横幅",
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "default",
+            "コンテンツ幅"
+          ],
+          [
+            "full",
+            "フルサイズ"
+          ]
+        ],
+        "type": "choice",
+        "default": "full"
+      },
+      {
+        "id": "fv.pad_vert",
+        "name": "pad_vert",
+        "label": "上下の余白",
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "none",
+            "なし"
+          ],
+          [
+            "default",
+            "標準"
+          ],
+          [
+            "free",
+            "自由指定"
+          ]
+        ],
+        "type": "choice",
+        "default": "none"
+      },
+      {
+        "id": "fv.free_pad_vert",
+        "name": "free_pad_vert",
+        "label": "上下の余白（自由指定）",
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 0,
+        "type": "number",
+        "visibility": {
+          "controlling_field": "fv.pad_vert",
+          "access": null,
+          "controlling_value_regex": "free",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "fv.free_pad_vert_sp",
+        "name": "free_pad_vert_sp",
+        "label": "上下の余白自由指定 SP）",
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 0,
+        "type": "number",
+        "visibility": {
+          "controlling_field": "fv.pad_vert",
+          "access": null,
+          "controlling_value_regex": "free",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "fv.bg_img",
+        "name": "bg_img",
+        "label": "背景画像",
+        "inline_help_text": "alt属性は不要です",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": false,
+        "show_loading": false,
+        "type": "image",
+        "default": {
+          "src": "",
+          "alt": null,
+          "size_type": null,
+          "width": null,
+          "height": null,
+          "max_width": null,
+          "max_height": null,
+          "loading": "disabled"
+        }
+      },
+      {
+        "id": "fv.bg_style",
+        "name": "bg_style",
+        "label": "背景画像の表示方法",
+        "help_text": "",
+        "inline_help_text": "",
+        "required": false,
+        "locked": false,
+        "visibility": {
+          "controlling_field": "fv.bg_img",
+          "controlling_value_regex": "",
+          "operator": "NOT_EMPTY",
+          "access": null,
+          "hidden_subfields": null
+        },
+        "display": "radio",
+        "choices": [
+          [
+            "repeat",
+            "繰り返し"
+          ],
+          [
+            "cover",
+            "全画面表示"
+          ]
+        ],
+        "type": "choice",
+        "default": "repeat"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "type": "group"
+  },
+  {
+    "id": "sections",
+    "name": "sections",
+    "label": "セクションの設定",
+    "required": false,
+    "locked": false,
+    "occurrence": {
+      "min": null,
+      "max": 15,
+      "sorting_label_field": "",
+      "default": 4
+    },
+    "children": [
+      {
+        "id": "sect.bg_color",
+        "name": "bg_color",
+        "label": "背景色",
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "base",
+            "ベースカラー"
+          ],
+          [
+            "white",
+            "白"
+          ]
+        ],
+        "type": "choice",
+        "default": "base"
+      },
+      {
+        "id": "sect.width",
+        "name": "width",
+        "label": "横幅",
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "default",
+            "コンテンツ幅"
+          ],
+          [
+            "full",
+            "フルサイズ"
+          ]
+        ],
+        "type": "choice",
+        "default": "default"
+      },
+      {
+        "id": "sect.pad_vert",
+        "name": "pad_vert",
+        "label": "上下の余白",
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "none",
+            "なし"
+          ],
+          [
+            "default",
+            "標準"
+          ],
+          [
+            "free",
+            "自由指定"
+          ]
+        ],
+        "type": "choice",
+        "default": "default"
+      },
+      {
+        "id": "sect.free_pad_vert",
+        "name": "free_pad_vert",
+        "label": "上下の余白（自由指定）",
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 0,
+        "type": "number",
+        "visibility": {
+          "controlling_field": "sect.pad_vert",
+          "access": null,
+          "controlling_value_regex": "free",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "sect.free_pad_vert_sp",
+        "name": "free_pad_vert_sp",
+        "label": "上下の余白自由指定 SP）",
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 0,
+        "type": "number",
+        "visibility": {
+          "controlling_field": "sect.pad_vert",
+          "access": null,
+          "controlling_value_regex": "free",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "sect.bg_img",
+        "name": "bg_img",
+        "label": "背景画像",
+        "inline_help_text": "alt属性は不要です",
+        "required": false,
+        "locked": false,
+        "responsive": true,
+        "resizable": false,
+        "show_loading": false,
+        "type": "image",
+        "default": {
+          "src": "",
+          "alt": null,
+          "size_type": null,
+          "width": null,
+          "height": null,
+          "max_width": null,
+          "max_height": null,
+          "loading": "disabled"
+        }
+      },
+      {
+        "id": "sect.bg_style",
+        "name": "bg_style",
+        "label": "背景画像の表示方法",
+        "help_text": "",
+        "inline_help_text": "",
+        "required": false,
+        "locked": false,
+        "visibility": {
+          "controlling_field": "sect.bg_img",
+          "controlling_value_regex": "",
+          "operator": "NOT_EMPTY",
+          "access": null,
+          "hidden_subfields": null
+        },
+        "display": "radio",
+        "choices": [
+          [
+            "repeat",
+            "繰り返し"
+          ],
+          [
+            "cover",
+            "全画面表示"
+          ]
+        ],
+        "type": "choice",
+        "default": "repeat"
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "type": "group",
+    "default": [
+      {
+        "bg_color": "white",
+        "width": "default",
+        "pad_vert": "default",
+        "free_pad_vert": 0,
+        "free_pad_vert_sp": 0,
+        "ex_class": "",
+        "bg_img": null
+      },
+      {
+        "bg_color": "base",
+        "width": "default",
+        "pad_vert": "default",
+        "free_pad_vert": 0,
+        "free_pad_vert_sp": 0,
+        "ex_class": "",
+        "bg_img": null
+      },
+      {
+        "bg_color": "white",
+        "width": "default",
+        "pad_vert": "default",
+        "free_pad_vert": 0,
+        "free_pad_vert_sp": 0,
+        "ex_class": "",
+        "bg_img": null
+      },
+      {
+        "bg_color": "base",
+        "width": "default",
+        "pad_vert": "default",
+        "free_pad_vert": 0,
+        "free_pad_vert_sp": 0,
+        "ex_class": "",
+        "bg_img": null
+      }
+    ]
+  }
+]

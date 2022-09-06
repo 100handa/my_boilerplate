@@ -1,0 +1,50 @@
+@use './css/sass/config/_mixin' as *;
+
+.bl_vertPosts_item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+
+  &:first-child {
+    padding-top: 0;
+  }
+}
+
+.bl_vertPosts_header {
+  margin-bottom: 10px;
+
+  > *:last-child {
+    margin-right: 0;
+  }
+}
+
+.bl_vertPosts_date {
+  margin-right: 10px;
+}
+
+.bl_vertPosts_labels {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-bottom: -10px;
+
+  > *:last-child {
+    margin-right: 0;
+  }
+
+  > li {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.bl_vertPosts_date {
+  font-size: 0.875rem;
+}
+
+.bl_vertPosts_ttl {
+  text-decoration: none;
+
+  @include FH() {
+    text-decoration: underline;
+  }
+}

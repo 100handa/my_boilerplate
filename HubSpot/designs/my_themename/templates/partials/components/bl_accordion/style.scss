@@ -1,0 +1,70 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+
+.bl_accordion_body + dt {
+  margin-top: 20px;
+}
+
+.bl_accordion_btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  font-size: 1.125rem;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  background-color: $c_theme;
+  border: 2px solid $c_theme;
+  transition: 0.25s;
+  @include FH() {
+    color: $c_theme;
+    background-color: #fff;
+  }
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    display: block;
+    width: 20px;
+    height: 2px;
+    content: '';
+    background-color: currentColor;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    display: block;
+    width: 2px;
+    height: 20px;
+    content: '';
+    background-color: currentColor;
+    transform: translateY(-50%);
+  }
+
+  &.is_active::after {
+    content: none;
+  }
+}
+
+.bl_accordion_body {
+  display: none;
+  padding: 15px;
+  border: 1px solid #ddd;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .is_active {
+    display: block;
+  }
+}
+
+.bl_accordion_txt {
+  margin-bottom: 20px;
+}

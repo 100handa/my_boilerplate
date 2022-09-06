@@ -1,0 +1,7 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+  -->
+{%- macro mcr(str) -%}
+  {{ str|replace('\n', '<br>') }}
+{%- endmacro -%}

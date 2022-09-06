@@ -1,0 +1,28 @@
+[
+  {
+    "id" : "nav",
+    "name" : "nav",
+    "label": "ナビゲーションの選択",
+    "required": false,
+    "locked": false,
+    "type": "menu",
+    "default": null,
+    "help_text": "",
+    "inline_help_text": ""
+  },
+  {
+    "id": "copyright",
+    "name": "copyright",
+    "label": "コピーライトテキスト",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": true,
+    "show_emoji_picker": true,
+    "type": "text",
+    "default": "© Pensees",
+    "placeholder": "",
+    "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;",
+    "help_text": ""
+  }
+]

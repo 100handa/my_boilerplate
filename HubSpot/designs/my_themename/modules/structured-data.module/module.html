@@ -1,0 +1,181 @@
+{%- macro code() -%}
+  {%- set json_ld = [] -%}
+
+  {# @WebPage
+  ========================================================================== #}
+  {%- if module.webpage and not group.id -%}
+    {%- set current_page = {
+      headline: content.html_title,
+      description: content.meta_description,
+      url: content.absolute_url
+    } -%}
+    {%- if group.id -%}
+      {%- do current_page.update({
+        description: group.description,
+      }) -%}
+    {%- endif -%}
+
+    {%- do json_ld.append(
+      {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "name": "{{ site_settings.company_name }}",
+        "inLanguage": "{{ content.language.languageTag || 'ja' }}",
+        "publisher": {
+        "@type": "Organization",
+        "name": "{{ site_settings.company_name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ domain_settings.logo_src }}"
+        }
+      },
+        "copyrightYear": "{{ local_dt }}",
+        "headline": "{{ current_page.headline }}",
+        "description": "{{ current_page.description }}",
+        "url": "{{ current_page.url }}"
+      }
+    ) -%}
+  {%- endif -%}
+
+  {# @Organization（トップページのみ）
+  ========================================================================== #}
+  {%- if module.organization and request.domain == request.full_url|cut(request.scheme + '://') -%}
+    {%- set street_address = site_settings.company_street_address_2
+      ? site_settings.company_street_address_2 + ', ' + site_settings.company_street_address_1
+      : site_settings.company_street_address_1  -%}
+    {%- set company_info = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: site_settings.company_name,
+      url: request.domain,
+      logo: domain_settings.logo_src,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site_settings.company_city,
+        addressRegion: site_settings.company_state,
+        streetAddress: street_address
+      }
+    } -%}
+
+    {%- if site_settings.company_zip -%}
+      {%- do company_info.address.update({
+        postalCode: site_settings.company_zip
+      }) -%}
+    {%- endif -%}
+
+    {%- if site_settings.company_country -%}
+      {%- do company_info.address.update({
+        addressCountry: site_settings.company_country
+      }) -%}
+    {%- endif -%}
+
+    {%- if site_settings.companyPhone -%}
+      {%- do company_info.update({
+        telephone: site_settings.companyPhone,
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            "telephone": site_settings.companyPhone,
+            "contactType": "customer service"
+          }
+        ]
+      }) -%}
+    {%- endif -%}
+
+    {%- do json_ld.append(company_info) -%}
+  {%- endif -%}
+
+  {# @BreadcrumbList
+  ========================================================================== #}
+  {%- if module.breadcrumbList -%}
+    {%- set current_node = menu(module.menu, "breadcrumb") -%}
+    {%- if current_node.level > 1 and current_node.pageTitle == content.name|striptags -%}
+      {%- set breadcrumb_tree = [
+        {
+          name: page_meta.html_title,
+          item: content.absolute_url
+        }
+      ] -%}
+      {%- set everything = menu(module.menu, "top_parent") -%}
+      {%- macro append_parent_recursively(label, breadcrumb_tree) -%}
+        {%- for item in everything -%}
+          {# labelの親ページをappend #}
+          {%- if label is within item.children|map(attribute="pageTitle") -%}
+            {%- set parent = content_by_id(item.pageId) || blog_by_id(item.pageId) -%}
+            {%- do breadcrumb_tree.append({
+              name: parent.htmlTitle,
+              item: parent.absoluteUrl
+            }) -%}
+            {# トップレベルでなければ再帰的に処理 #}
+            {%- if item.level > 1 -%}
+              {{- append_parent_recursively(item.pageTitle, breadcrumb_tree) -}}
+            {%- endif -%}
+          {%- endif -%}
+          {# label is within item.children|map(attribute="label") #}
+        {%- endfor -%}
+      {%- endmacro -%}
+      {{ append_parent_recursively(content.name|striptags, breadcrumb_tree) }}
+    {%- endif -%}
+    {%- do breadcrumb_tree.reverse() -%}
+
+    {%- for item in breadcrumb_tree -%}
+      {%- do breadcrumb_tree[loop.index0].update({
+        "@type": "ListItem",
+        "position": loop.index,
+        "name": item.name,
+        "item": item.item
+      }) -%}
+    {%- endfor -%}
+
+    {%- if breadcrumb_tree -%}
+      {%- do json_ld.append({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumb_tree
+      }) -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {# @BlogPosting
+  ========================================================================== #}
+  {%- if module.blogPosting and group.id and not is_listing_view -%}
+    {%- set dict = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ group.absolute_url }}"
+      },
+      "headline": "{{ page_meta.html_title }}",
+      "datePublished": "{{ content.publish_date }}",
+      "dateModified": "{{ to_local_time(content.updated) }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ content.blog_post_author.display_name }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site_settings.company_name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ domain_settings.logo_src }}"
+        }
+      }
+    } -%}
+    {%- if content.featured_image -%}
+      {%- do dict.update({
+        "image": [
+          "{{ content.featured_image }}"
+        ]
+      }) -%}
+      {%- do json_ld.append(dict) -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if json_ld -%}
+    {%- require_js -%}
+      <script type="application/ld+json">{{ json_ld|tojson }}</script>
+    {%- end_require_js -%}
+  {%- endif -%}
+{%- endmacro -%}
+{{ code()|regex_replace('(\n| {2,})', ' ')|trim }}

@@ -1,0 +1,13 @@
+{%- macro code(data) -%}
+  <h1 class="el_lv1Heading {{ data.root.class }}">
+    <span>{{ data.ttl.cont }}</span>
+  </h1>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

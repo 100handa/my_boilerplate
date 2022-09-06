@@ -1,0 +1,42 @@
+{%- import "/themename/templates/partials/components/bl_pager/index.html" as bl_pager -%}
+
+{%- macro code() -%}
+  <div class="hs-search-results">
+    <p>
+      <span class="hs-search-results__total-result-number"></span>件中<span class="hs-search-results__current-result-number"></span>件表示
+    </p>
+
+    <template class="hs-search-results__template">
+      <li>
+        {% if module.display_featured_images %}
+          <div class="hs-search-results__featured-image">
+            <img src="" alt="">
+          </div>
+        {% endif %}
+        <a href="#" class="hs-search-results__title">Content Title</a>
+        <p style="display: none" class="hs-search-results__description">Description</p>
+      </li>
+    </template>
+    <ul id="hsresults" class="hs-search-results__listing"></ul>
+    <ul class="hs-search-results__pagination bl_pager bl_pager__numbered" data-search-path="{{ site_settings.content_search_results_page_path }}">
+      <li class="bl_pager_item">
+        <a href="" class="hs-search-results__prev-page el_btn">&lt;</a>
+      </li>
+      <li class="bl_pager_item">
+        <a href="" class="hs-search-results__next-page el_btn">&gt;</a>
+      </li>
+    </ul>
+  </div>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}
+
+{%- require_js -%}
+  <script>{%- include './script.js' -%}</script>
+{%- end_require_js -%}

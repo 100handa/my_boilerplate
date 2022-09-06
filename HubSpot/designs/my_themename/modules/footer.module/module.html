@@ -1,0 +1,17 @@
+{%- import "/themename/templates/partials/components/ly_footer/index.html" as ly_footer -%}
+
+{%- if template_settings.type == 'lp' -%}
+  {{ ly_footer.mcr({
+    copyright: {
+      cont: module.copyright
+    }
+  }) }}
+{%- else -%}
+  {%- set menu_node = menu(module.nav) -%}
+  {{ ly_footer.mcr({
+    nav: menu_node,
+    copyright: {
+      cont: module.copyright
+    }
+  }) }}
+{%- endif -%}

@@ -1,0 +1,103 @@
+{%- import "/themename/templates/partials/macros/return-img-elm.html" as img -%}
+{%- import "/themename/templates/partials/macros/handle-menu-node.html" as hmn -%}
+
+{#
+  {
+    ex_class,
+    logo: {
+      link: {
+        href,
+        attr
+      },
+      img: {
+        src,
+        alt,
+        width,
+        height
+      }
+    },
+    btns: [
+      {
+        link: {
+          href,
+          attr
+        },
+        txt
+      }
+    ],
+    ctas: [],
+    nav: menu_node
+  }
+#}
+{%- macro code(data) -%}
+  {%- set is_site_root = request.domain == request.full_url|regex_replace('https?://', '') -%}
+  <header class="ly_header">
+    <div class="ly_header_inner">
+      <div class="bl_headerUtils">
+        {{ '<h1>' if is_site_root }}
+          <a class="bl_headerUtils_logo" href="{{ data.logo.link.href }}" {{ data.logo.link.attr }}>{{ img.mcr(data.logo.img) }}</a>
+        {{ '</h1>' if is_site_root }}
+        {%- if data.btns or data.ctas -%}
+          <ul class="bl_headerUtils_btns">
+            {%- if data.btns -%}
+              {%- for btn in data.btns -%}
+                <li>
+                  <a class="el_btn" href="{{ btn.link.href }}" {{ btn.link.attr }}>{{ btn.txt }}</a>
+                </li>
+              {%- endfor -%}
+            {%- elif data.ctas -%}
+              {%- for item in data.ctas -%}
+                <li>{{ cta(item) }}</li>
+              {%- endfor -%}
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+      </div>
+      <!-- /.bl_headerUtils -->
+      {%- if data.nav -%}
+        <nav>
+          <ul class="bl_headerNav js_headerMenu">
+            {%- for lv1 in data.nav.children %}
+              <li class="
+                bl_headerNav_item
+                {{ ' bl_headerNav_item__hasChild' if lv1.children is truthy }}
+              ">
+                <{{ hmn.tag(lv1) }} class="
+                  bl_headerNav_link
+                   {{ ' js_headerMenu_childBtn' if lv1.children is truthy }}
+                " {{ hmn.attr(lv1) }}>{{ lv1.label }}</{{ hmn.tag(lv1) }}>
+                {%- if lv1.children %}
+                  <ul class="bl_headerChildNav js_headerMenu_childMenu">
+                    {%- for lv2 in lv1.children -%}
+                      <li class="bl_headerChildNav_item">
+                        <{{ hmn.tag(lv2) }} class="bl_headerChildNav_link" {{ hmn.attr(lv2) }}>{{ lv2.label }}</{{ hmn.tag(lv2) }}>
+                      </li>
+                    {%- endfor %}
+                  </ul>
+                {%- endif %}
+              </li>
+            {%- endfor %}
+          </ul>
+        </nav>
+        <button class="bl_headerSpBtn js_headerMenuBtn">
+          <span class="bl_headerSpBtn_line"></span>
+          <span class="bl_headerSpBtn_line"></span>
+          <span class="bl_headerSpBtn_line"></span>
+        </button>
+      {%- endif -%}
+    </div>
+    <!-- /.ly_header_inner -->
+  </header>
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_js -%}
+  <script>
+    (function () {
+      {%- include './script.js' -%}
+    })();
+  </script>
+{%- end_require_js -%}

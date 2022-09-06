@@ -1,0 +1,18 @@
+<!--
+  templateType: error_page
+  isAvailableForNewContent: true
+  enableDomainStylesheets: false
+  label: 500
+-->
+{%- extends '/themename/templates/layouts/1col.html' %}
+
+{%- block content -%}
+  {%- module "ttl" path="/themename/modules/page-title", ttl="500 Internal Server Error" -%}
+  <div class="ly_cont">
+    <div class="bl_sect">
+      サーバーでエラーが発生しました。再読み込みするか、時間をおいてから再度お試しください。
+    </div>
+    <!-- /.bl_sect -->
+  </div>
+  <!-- /.ly_cont -->
+{%- endblock -%}

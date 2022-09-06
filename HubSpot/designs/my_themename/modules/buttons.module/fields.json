@@ -1,0 +1,202 @@
+[
+  {
+    "id": "btns",
+    "name": "btns",
+    "label": "ボタンの設定",
+    "tab": "CONTENT",
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "help_text": "",
+    "occurrence": {
+      "min": 1,
+      "max": null,
+      "sorting_label_field": "",
+      "default": 2
+    },
+    "default": [],
+    "children": [
+      {
+        "id": "btns.content_type",
+        "name": "content_type",
+        "label": "表示形式",
+        "display": "radio",
+        "locked": false,
+        "choices": [
+          [
+            "cta",
+            "CTA"
+          ],
+          [
+            "manual",
+            "手動"
+          ]
+        ],
+        "default": "manual",
+        "type": "choice",
+        "required": false
+      },
+      {
+        "id": "btns.cta",
+        "name": "cta",
+        "label": "CTAの選択",
+        "required": false,
+        "locked": false,
+        "type": "cta",
+        "default": null,
+        "visibility": {
+          "controlling_field": "btns.content_type",
+          "access": null,
+          "controlling_value_regex": "cta",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "btns.txt",
+        "name": "txt",
+        "label": "ボタン文言",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "allow_new_line": true,
+        "show_emoji_picker": false,
+        "type": "text",
+        "default": "テキストが入ります",
+        "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;",
+        "visibility": {
+          "controlling_field": "btns.content_type",
+          "access": null,
+          "controlling_value_regex": "manual",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "btns.color",
+        "name": "color",
+        "label": "ボタンの色",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "value 1",
+            "Label 1"
+          ],
+          [
+            "value 2",
+            "Label 2"
+          ]
+        ],
+        "type": "choice",
+        "default": "value 2",
+        "help_text": "",
+        "visibility": {
+          "controlling_field": "btns.content_type",
+          "access": null,
+          "controlling_value_regex": "manual",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      },
+      {
+        "id": "btns.link",
+        "name": "link",
+        "label": "リンク先",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "supported_types": [
+          "EXTERNAL",
+          "FILE",
+          "EMAIL_ADDRESS"
+        ],
+        "type": "link",
+        "default": {
+          "url": {
+            "type": "CONTENT"
+          },
+          "open_in_new_tab": false,
+          "no_follow": false
+        },
+        "visibility": {
+          "controlling_field": "btns.content_type",
+          "access": null,
+          "controlling_value_regex": "manual",
+          "hidden_subfields": null,
+          "operator": "EQUAL"
+        }
+      }
+    ]
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.align",
+        "name": "align",
+        "label": "揃え位置",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "left",
+            "左揃え"
+          ],
+          [
+            "center",
+            "中央揃え"
+          ],
+          [
+            "right",
+            "右揃え"
+          ]
+        ],
+        "type": "choice",
+        "default": "center"
+      },
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

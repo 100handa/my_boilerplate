@@ -1,0 +1,58 @@
+[
+  {
+    "id": "webpage",
+    "name": "webpage",
+    "label": "@WebPage",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true
+  },
+  {
+    "id": "organization",
+    "name": "organization",
+    "label": "@Organization",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true
+  },
+  {
+    "id": "breadcrumbList",
+    "name": "breadcrumbList",
+    "label": "@BreadcrumbList",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true
+  },
+  {
+    "id": "menu",
+    "name": "menu",
+    "label": "Menu",
+    "required": false,
+    "locked": false,
+    "type": "menu",
+    "default": null,
+    "visibility": {
+      "controlling_field": "breadcrumbList",
+      "access": null,
+      "controlling_value_regex": "true",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "blogPosting",
+    "name": "blogPosting",
+    "label": "@BlogPosting",
+    "sortable": false,
+    "required": false,
+    "locked": false,
+    "type": "boolean",
+    "default": true
+  }
+]

@@ -1,0 +1,115 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+@use './css/sass/config/_function' as *;
+
+.ly_footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #222;
+
+  &_inner {
+    box-sizing: border-box;
+    @include contentCentering();
+  }
+}
+
+.bl_footerNav {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  @include MQ(m) {
+    display: block;
+    font-size: pxToRem(12);
+  }
+
+  &_item {
+    flex: 1;
+    text-align: center;
+    @include MQ(m) {
+      margin-right: 0;
+      margin-bottom: 0;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    &:last-child .bl_footerNav_link::after {
+      content: none;
+    }
+  }
+}
+
+.bl_footerNav_link {
+  position: relative;
+  display: block;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-decoration: none;
+  @include FH() {
+    text-decoration: underline;
+  }
+  @include MQ(m) {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 10px 7px $contSpace;
+    white-space: normal;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.3);
+  }
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 15px;
+    content: '';
+    background-color: currentColor;
+    transform: translateY(-50%);
+    @include MQ() {
+      content: none;
+    }
+  }
+}
+
+.bl_footerChildNav {
+  padding-left: 0;
+  list-style-type: none;
+
+  &_item {
+    margin-bottom: 10px;
+  }
+
+  &_link {
+    font-size: 15px;
+    color: #ddd;
+    text-decoration: none;
+    @include FH() {
+      text-decoration: underline;
+    }
+    @include MQ(m) {
+      display: block;
+      padding-left: 1em;
+      font-size: pxToRem(12);
+      text-align: left;
+      white-space: normal;
+      border-bottom-color: rgba(238, 238, 238, 0.3);
+
+      &::before {
+        content: '- ';
+      }
+    }
+  }
+}
+
+.el_footerCopyright {
+  display: block;
+  font-size: 12px;
+  color: #ddd;
+  text-align: center;
+}

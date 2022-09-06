@@ -1,0 +1,12 @@
+{
+  "label": "構造化データ",
+  "is_available_for_new_content": false,
+    "css_assets" : [ {
+    "autoload" : true,
+    "path" : "../../css/style.css",
+    "name" : "style.css"
+  } ],
+  "host_template_types": ["PAGE"],
+  "global": true,
+  "smart_type": "NOT_SMART"
+}

@@ -1,0 +1,53 @@
+{%- import "/themename/templates/partials/macros/handle-link-obj.html" as hlo -%}
+{%- import "/themename/templates/partials/components/ly_header/index.html" as ly_header -%}
+
+{%- set logo_href = hlo.return_href(module.logo.link) -%}
+{%- set logo_attr = hlo.return_attr(module.logo.link) -%}
+
+{%- if template_settings.type == 'lp' -%}
+  {%- set options = {
+    logo: {
+      link: {
+        href: logo_href,
+        attr: logo_attr
+      },
+      img: module.logo.img
+    }
+  } -%}
+  {{ ly_header.mcr(options) }}
+{%- else -%}
+  {%- set menu_node = menu(module.nav) -%}
+  {%- set options = {
+    logo: {
+      link: {
+        href: logo_href,
+        attr: logo_attr
+      },
+      img: module.logo.img
+    },
+    nav: menu_node
+  } -%}
+
+  {%- if module.btn_type == 'manual' -%}
+    {%- set btns = [] -%}
+    {%- for btn in module.btns -%}
+      {%- set href = hlo.return_href(btn.link) -%}
+      {%- set attr = hlo.return_attr(btn.link) -%}
+      {%- do btns.append({
+        link: {
+          href: href,
+          attr: attr
+        },
+        txt: btn.txt
+      }) -%}
+    {%- endfor -%}
+    {%- do options.update({
+      btns: btns
+    }) -%}
+  {%- else -%}
+    {%- do options.update({
+      ctas: module.ctas
+    }) -%}
+  {%- endif -%}
+  {{ ly_header.mcr(options) }}
+{%- endif -%}

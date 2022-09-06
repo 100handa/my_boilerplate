@@ -1,0 +1,63 @@
+@use './css/sass/config/_inc' as *;
+
+.bl_bulletList {
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  > li {
+    position: relative;
+    padding-left: 0.75em;
+    margin-bottom: 0.75em;
+
+    &::before {
+      position: absolute;
+      top: 0.5em;
+      left: 0;
+      display: block;
+      width: 0.4em;
+      height: 0.4em;
+      content: '';
+      background-color: #e25c00;
+      border-radius: 50%;
+    }
+  }
+}
+
+.bl_bulletList__inline {
+  @at-root {
+    .bl_bulletList#{&} {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: -0.75em;
+
+      > li {
+        margin-right: 1em;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.bl_bulletList__col2 {
+  @at-root {
+    .bl_bulletList#{&} {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: -0.75em;
+
+      > li {
+        flex: calc(50% - 0.5em);
+        margin-right: 0.75em;
+
+        &:nth-of-type(even) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

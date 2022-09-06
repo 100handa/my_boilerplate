@@ -1,0 +1,44 @@
+@use './css/sass/config/_mixin' as *;
+
+.bl_horizBtnList {
+  $this: '.bl_horizBtnList';
+  @include lastMR0();
+  display: flex;
+  justify-content: center;
+  @include MQ() {
+    @include lastMB0();
+    flex-direction: column;
+    align-items: center;
+  }
+
+  > li {
+    flex: 1 1 0;
+    max-width: 300px;
+    margin-right: 20px;
+    @include MQ() {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  .el_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    &.cta_button {
+      box-sizing: border-box !important;
+    }
+  }
+
+  &#{$this}__alignLeft {
+    justify-content: flex-start;
+  }
+
+  &#{$this}__alignRight {
+    justify-content: flex-end;
+  }
+}

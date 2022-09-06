@@ -1,0 +1,295 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+
+/* display
+========================================================================== */
+//.hp_dn{display: none!important;}
+//.hp_db{display: block!important;}
+//.hp_di{display: inline!important;}
+//.hp_dib{display: inline-block!important;}
+//.hp_dtb{display: table!important;}
+//.hp_ditb{display: inline-table!important;}
+//.hp_dtbc{display: table-cell!important;}
+//.hp_dtbr{display: table-row!important;}
+
+/* width
+========================================================================== */
+//@for $value from 0 through 20{
+//  .hp_wd#{$value*5}p{
+//    width:5%*$value!important;
+//  }
+//}
+
+/* padding
+========================================================================== */
+//@for $value from 0 through 20{
+//  .hp_p#{$value*5}{
+//    padding:5px*$value!important;
+//  }
+//}
+/*
+padding-top
+*/
+@for $value from 0 through 20 {
+  .hp_pt#{$value*5} {
+    padding-top: 5px * $value !important;
+  }
+}
+
+/*
+padding-right
+*/
+//@for $value from 0 through 20{
+//  .hp_pr#{$value*5}{
+//    padding-right:5px*$value!important;
+//  }
+//}
+/*
+padding-bottom
+*/
+@for $value from 0 through 20 {
+  .hp_pb#{$value*5} {
+    padding-bottom: 5px * $value !important;
+  }
+}
+
+/*
+padding-left
+*/
+//@for $value from 0 through 20{
+//  .hp_pl#{$value*5}{
+//    padding-left:5px*$value!important;
+//  }
+//}
+
+/* margin
+========================================================================== */
+//@for $value from 0 through 20{
+//  .hp_m#{$value*5}{
+//    margin:5px*$value!important;
+//  }
+//}
+/*
+margin-top
+*/
+//@for $value from 1 through 20{
+//  .hp_MT#{$value*5}{
+//    margin-top:-5px*$value!important;
+//  }
+//}
+@for $value from 0 through 20 {
+  .hp_mt#{$value*5} {
+    margin-top: 5px * $value !important;
+  }
+}
+/*
+margin-right
+*/
+.hp_mr45 {
+  margin-right: 45px !important;
+}
+
+//@for $value from 1 through 20{
+//  .hp_MR#{$value*5}{
+//    margin-right:-5px*$value!important;
+//  }
+//}
+//@for $value from 0 through 20{
+//  .hp_mr#{$value*5}{
+//    margin-right:5px*$value!important;
+//  }
+//}
+/*
+margin-bottom
+*/
+//@for $value from 1 through 20{
+//  .hp_MB#{$value*5}{
+//    margin-bottom:-5px*$value!important;
+//  }
+//}
+@for $value from 0 through 20 {
+  .hp_mb#{$value*5} {
+    margin-bottom: 5px * $value !important;
+  }
+}
+
+/*
+margin-left
+*/
+//@for $value from 1 through 20{
+//  .hp_ML#{$value*5}{
+//    margin-left:-5px*$value!important;
+//  }
+//}
+//@for $value from 0 through 20{
+//  .hp_ml#{$value*5}{
+//    margin-left:5px*$value!important;
+//  }
+//}
+//.hp_centering{
+//  display: block;
+//  margin-right: auto;
+//  margin-left: auto;
+//}
+//
+//.hp_lgSpace {
+// margin-bottom: 100px !important;
+//}
+//@include MQ(){
+//  .hp_lgSpace {
+//    margin-bottom: 80px !important;
+//  }
+//}
+//
+//.hp_mdSpace {
+// margin-bottom: 60px !important;
+//}
+//@include MQ(){
+// .hp_mdSpace {
+//   margin-bottom: 40px !important;
+// }
+//}
+//
+//.hp_smSpace {
+// margin-bottom: 30px !important;
+//}
+//@include MQ(){
+// .hp_smSpace {
+//   margin-bottom: 20px !important;
+// }
+//}
+
+/* Background
+========================================================================== */
+.hp_bgcBase {
+  background-color: $c_base !important;
+}
+
+.hp_bgcWhite {
+  background-color: #fff !important;
+}
+
+.hp_sectBgImg {
+  background-position: top center;
+}
+
+/* Border
+========================================================================== */
+.hp_btGray {
+  border-top: 1px solid #777 !important;
+}
+
+.hp_btLightGray {
+  border-top: 1px solid rgba(238, 238, 238, 0.3) !important;
+}
+
+/* font
+========================================================================== */
+.hp_fwb {
+  font-weight: bold !important;
+}
+
+/* text-align
+========================================================================== */
+.hp_tal {
+  text-align: left !important;
+}
+
+.hp_tac {
+  text-align: center !important;
+}
+
+.hp_tar {
+  text-align: right !important;
+}
+
+.hp_taj {
+  text-align: justify !important;
+}
+
+.hp_serif {
+  font-family: $ff_serif !important;
+}
+
+/* vertical-align
+========================================================================== */
+//.hp_vam{vertical-align: middle !important;}
+
+/* PC
+========================================================================== */
+.lg_only {
+  @include MQ() {
+    display: none !important;
+  }
+}
+
+/* SP
+========================================================================== */
+.md_only {
+  display: none !important;
+  @include MQ() {
+    display: block !important;
+  }
+}
+
+.md_firstChildPt0 {
+  > *:first-child {
+    @include MQ() {
+      padding-top: 0 !important;
+    }
+  }
+}
+
+.md_pr25 {
+  @include MQ() {
+    padding-right: 25px !important;
+  }
+}
+
+.md_pr35 {
+  @include MQ() {
+    padding-right: 35px !important;
+  }
+}
+
+.md_pl25 {
+  @include MQ() {
+    padding-left: 25px !important;
+  }
+}
+
+.md_pl35 {
+  @include MQ() {
+    padding-left: 35px !important;
+  }
+}
+
+.md_tal {
+  @include MQ() {
+    text-align: left !important;
+  }
+}
+
+@for $value from 0 through 20 {
+  .md_pt#{$value*5} {
+    @include MQ() {
+      padding-top: 5px * $value !important;
+    }
+  }
+}
+
+@for $value from 0 through 20 {
+  .md_pb#{$value*5} {
+    @include MQ() {
+      padding-bottom: 5px * $value !important;
+    }
+  }
+}
+
+@for $value from 0 through 20 {
+  .md_mt#{$value*5} {
+    @include MQ() {
+      margin-top: 5px * $value !important;
+    }
+  }
+}

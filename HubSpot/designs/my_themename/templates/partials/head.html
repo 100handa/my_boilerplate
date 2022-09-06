@@ -1,0 +1,58 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: false
+-->
+{%- macro code() -%}
+{%- module "site_settings" path="/themename/modules/site-settings", label="サイト設定", export_to_template_context=True -%}
+{%- set common_meta_title = widget_data.site_settings.meta_title_common -%}
+{%- set meta_title = '' -%}
+{%- set basic_meta_title = page_meta.html_title + common_meta_title -%}
+{%- if page_meta.html_title is string_containing "｜" -%}
+  {# 全角パイプを含んでいれば、ページ編集画面の通りに出力する #}
+  {%- set meta_title = page_meta.html_title -%}
+{%- elif is_listing_view -%}
+  {# ブログ一覧ページを想定 #}
+  {%- if group.slug == request.path|cut('/') -%}
+    {# ブログトップを想定 #}
+    {%- set meta_title = basic_meta_title -%}
+  {%- elif topic -%}
+    {# ブログタグアーカイプを想定 #}
+    {%- set meta_title = page_meta.html_title|trim|split('|')|last + '｜' + group.name + common_meta_title -%}
+  {%- endif -%}
+{%- elif group.name -%}
+  {# ブログ詳細を想定 #}
+  {%- set meta_title = page_meta.html_title + '｜' + group.name + common_meta_title -%}
+{#{%- elif dynamic_page_route_level == 1 -%}#}
+{#  #}{# HubDB動的ページを想定 #}
+{#  {%- if dynamic_page_hubdb_table_id == vars.hubdb.props -%}#}
+{#    #}{# 特定のHubDBの場合 #}
+{#    {%- set meta_title = page_meta.html_title + '｜HubDB名' + common_meta_title -%}#}
+{#  {%- elif dynamic_page_hubdb_table_id == vars.hubdb.term_detail -%}#}
+{#    #}{# HubDB動的生成一般の場合 #}
+{#    {%- set meta_title = basic_meta_title -%}#}
+{#  {%- endif -%}#}
+{%- else -%}
+  {%- set meta_title = basic_meta_title -%}
+{%- endif -%}
+<!doctype html>
+<html lang="{{ html_lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="{{ page_meta.meta_description }}">
+  <meta property="og:site_name" content="{{ site_settings.company_name }}">
+  {{ '<link rel="shortcut icon" href="{{ site_settings.favicon_src }}">' if site_settings.favicon_src }}
+  <meta name="format-detection" content="telephone=no">
+  <title>{{ meta_title }}</title>
+  <link rel="preload" href="{{ get_asset_url('/themename/css/style.css') }}" as="style">
+  {{ require_css(get_asset_url('/themename/css/style.css')) }}
+  {{ standard_header_includes }}
+  {%- if not content.featured_image -%}
+    <meta property="og:image"
+          content="{{ widget_data.site_settings.image.og_image.src }}">
+    <meta name="twitter:image"
+          content="{{ widget_data.site_settings.image.og_image.src }}">
+  {%- endif -%}
+</head>
+{%- endmacro -%}
+{{ code()|regex_replace('(\n| {2,})', ' ')|trim }}

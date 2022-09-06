@@ -1,0 +1,27 @@
+{#
+  {
+    root,
+    list_wrapper,
+    items: [
+      list_item
+    ]
+  }
+#}
+{%- macro code(data) -%}
+  <div class="{{ data.root.class }}">
+    <ul class="bl_bulletList {{ data.list_wrapper.class }}">
+      {%- for item in data.items -%}
+        <li>{{ item.list_item.cont }}</li>
+      {%- endfor -%}
+    </ul>
+  </div>
+  <!-- /.{{ data.root.class }} -->
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

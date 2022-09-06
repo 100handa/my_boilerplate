@@ -1,0 +1,172 @@
+[
+  {
+    "id": "ttl_tag",
+    "name": "ttl_tag",
+    "label": "タイトルのタグ",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "h3",
+    "placeholder": "",
+    "inline_help_text": "",
+    "help_text": "h2~h6やpなどを入力してください"
+  },
+  {
+    "id": "media_items",
+    "name": "media_items",
+    "label": "コンテンツ",
+    "occurrence": {
+      "default": 4,
+      "min": 1,
+      "max": null,
+      "sorting_label_field": "media_items.ttl"
+    },
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "default": [],
+    "tab": "CONTENT",
+    "children": [
+      {
+        "id": "media.img",
+        "name": "img",
+        "label": "画像の選択",
+        "required": false,
+        "locked": false,
+        "responsive": false,
+        "resizable": true,
+        "type": "image",
+        "show_loading": false,
+        "default": {
+          "src": "http://placehold.jp/640x426.png?text=画像",
+          "alt": "alt属性が入ります"
+        },
+        "inline_help_text": "",
+        "help_text": "サイズはCSSにて制御しているため、変更しても反映されません"
+      },
+      {
+        "id": "media_items.ttl",
+        "name": "ttl",
+        "label": "タイトル",
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "allow_new_line": true,
+        "show_emoji_picker": true,
+        "type": "text",
+        "default": "タイトルが入ります",
+        "placeholder": "",
+        "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;",
+        "help_text": ""
+      },
+      {
+        "id": "media_items.txt",
+        "name": "txt",
+        "label": "自由入力コンテンツ",
+        "required": false,
+        "locked": false,
+        "type": "richtext",
+        "default": "<p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</p>",
+        "inline_help_text": "",
+        "help_text": ""
+      }
+    ]
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.show_type",
+        "name": "show_type",
+        "label": "表示タイプ",
+        "required": true,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "default",
+            "画像小さめ"
+          ],
+          [
+            "half",
+            "画像半分サイズ"
+          ]
+        ],
+        "type": "choice",
+        "default": "default",
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "styles.align",
+        "name": "align",
+        "label": "並びの制御",
+        "required": true,
+        "locked": false,
+        "display": "radio",
+        "choices": [
+          [
+            "left",
+            "画像を左に"
+          ],
+          [
+            "right",
+            "画像を右に"
+          ],
+          [
+            "alt_left",
+            "交互に（1つ目を左に）"
+          ],
+          [
+            "alt_right",
+            "交互に（1つ目を右に）"
+          ]
+        ],
+        "type": "choice",
+        "default": "alt_left",
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

@@ -1,0 +1,13 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import '/themename/templates/partials/components/bl_horizTable/index.html'
+  as bl_horizTable
+-%}
+
+{{
+  bl_horizTable.mcr({
+    root: {
+      class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }} bl_wysiwyg',
+      cont: module.cont
+    }
+  })
+}}

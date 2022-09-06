@@ -1,0 +1,82 @@
+<!--
+    templateType: none
+    isAvailableForNewContent: true
+  -->
+
+{#
+  [Expression Tests](https://developers.hubspot.com/docs/cms/hubl/operators-and-expression-tests)
+#}
+{%- set exp_tests = ["boolean", "containing", "containingall", "defined", "divisibleby", "equalto", "even", "float", "integer", "iterable", "lower", "mapping", "none", "number", "odd", "sameas", "sequence", "string", "string_containing", "string_startingwith", "truthy", "undefined", "upper", "within"] -%}
+{%- set error_message = 'Wrong expression tests.' -%}
+
+{##
+ # Filter method like one in JavaScript. sytnax sugar of selectattr filter.
+ # @param {list} array - array to filter
+ # @param {string} key - key to filter
+ # @param {string} exp_test - Expression Test to apply
+ # @param {string, number, list} value - key-value to filter with exp_test
+ # @return {string} - JSON string of array.
+ #}
+{%- macro filter(array, key, exp_test, value) -%}
+  {%- if exp_test in exp_tests -%}
+    {%- set return_array = value is none
+      ? array|selectattr(key, exp_test)
+      : array|selectattr(key, exp_test, value)
+    -%}
+    {{ return_array|tojson }}
+  {%- else -%}
+    {{ [error_message]|tojson }}
+  {%- endif -%}
+{%- endmacro -%}
+
+
+{##
+ # Find method like one in JavaScript.
+ # @param {list} array - array to filter
+ # @param {string} key - key to filter
+ # @param {string} exp_test - Expression Test to apply
+ # @param {string, number, list} value - key-value to filter with exp_test
+ # @return {string} - JSON string of array.
+ #}
+{%- macro find(array, key, exp_test, value) -%}
+  {%- if exp_test in exp_tests -%}
+    {%- set return_array = value is none
+      ? array|selectattr(key, exp_test)
+      : array|selectattr(key, exp_test, value)
+    -%}
+    {{ return_array[0]|tojson }}
+  {%- else -%}
+    {{ [error_message]|tojson }}
+  {%- endif -%}
+{%- endmacro -%}
+
+
+{##
+ # FindIndex method like one in JavaScript.
+ # @param {list} array - array to filter
+ # @param {string, number} unique_key - unique key in array member
+ # @param {string} key - key to filter
+ # @param {string} exp_test - Expression Test to apply
+ # @param {string, number, list} value - key-value to filter with exp_test
+ # @return {string} - index found in array.
+ #}
+{%- macro find_index(array, unique_key, key, exp_test, value) -%}
+  {%- if exp_test in exp_tests -%}
+    {%- set matched_array = value is none
+      ? array|selectattr(key, exp_test)
+      : array|selectattr(key, exp_test, value)
+    -%}
+    {%- set first_matched_unique_value = matched_array[0][unique_key] -%}
+    {%- set key_array = key|split('.') -%}
+    {%- set return_indexes = [] -%}
+
+    {%- for item in array -%}
+      {%- set bool = return_indexes|length == 0 and item[unique_key] == first_matched_unique_value -%}
+      {%- do return_indexes.append(loop.index0) if bool -%}
+    {%- endfor -%}
+
+    {{ return_indexes|length ? return_indexes[0] : -1 }}
+  {%- else -%}
+    {{ error_message }}
+  {%- endif -%}
+{%- endmacro -%}

@@ -1,0 +1,8 @@
+module.css
+module.js
+style.css
+helpers.css
+**/css/main.css
+**/components/**/script.js
+*.map
+!./css/style.css

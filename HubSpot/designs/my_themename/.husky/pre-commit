@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo 'pre-commitフックでエラーが発生する場合は、formatコマンドで先にエラーを解消してください' && cd HubSpot/designs/themename && npx lint-staged

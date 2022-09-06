@@ -1,0 +1,12 @@
+*.scss
+*.ts
+*.babel.js
+package.json
+package-lock.json
+tsconfig.json
+*.map
+gulpfile.js
+.*
+*.lock
+*.md
+test

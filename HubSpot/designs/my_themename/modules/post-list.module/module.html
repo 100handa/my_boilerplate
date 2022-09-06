@@ -1,0 +1,53 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/handle-link-obj.html" as hlo -%}
+{%- import "/themename/templates/partials/macros/return-tag-obj.html" as return_tag_obj -%}
+{%- import "/themename/templates/partials/components/bl_vertPosts/index.html" as bl_vertPosts -%}
+
+{%- set items = [] -%}
+{%- if module.content_type == 'blog' -%}
+  {%- set posts = module.tag
+    ? blog_recent_tag_posts(module.blog, module.tag, module.show_num)
+    : blog_recent_posts(module.blog, module.show_num) -%}
+  {%- for item in posts -%}
+    {%- set tags = return_tag_obj.mcr('', item.topic_list)|fromjson -%}
+    {%- do items.append({
+      date: {
+        cont: item.publish_date_localized
+      },
+      tags: tags,
+      link: {
+        href: item.absolute_url,
+        cont: item.name
+      }
+    }) -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- for item in module.manual_contents -%}
+    {%- set href = hlo.return_href(item.link) -%}
+    {%- set attr = hlo.return_attr(item.link) -%}
+    {%- set tags = [] -%}
+    {%- for tag in item.tag|split('\n') -%}
+      {%- do tags.append({
+        cont: tag
+      }) -%}
+    {%- endfor -%}
+    {%- do items.append({
+      date: {
+        cont: item.date|datetimeformat('%Y/%m/%d')
+      },
+      tags: tags,
+      link: {
+        href: href,
+        attr: attr,
+        cont: item.ttl
+      }
+    }) -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{{ bl_vertPosts.mcr({
+  root: {
+    class: '{{ mt.mcr(module.styles.mt_lg_lg, module.styles.mt_md) }}'
+  },
+  items: items
+}) }}

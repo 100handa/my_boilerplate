@@ -1,0 +1,13 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import '/themename/templates/partials/components/bl_crossTable/index.html'
+  as bl_crossTable
+-%}
+
+{{
+  bl_crossTable.mcr({
+    root: {
+      class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }} bl_wysiwyg',
+      cont: module.cont
+    }
+  })
+}}

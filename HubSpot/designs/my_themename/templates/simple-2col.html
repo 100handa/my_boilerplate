@@ -1,0 +1,41 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  enableDomainStylesheets: false
+  label: ランディングページ（2カラム）
+-->
+
+{%- set template_settings = {
+  type: 'lp',
+  aside: {
+    ex_class: 'ly_cont_side__wide'
+  }
+} -%}
+
+{%- extends '/themename/templates/layouts/2col.html' %}
+
+{%- block header -%}
+  {%- module "header" path="/themename/modules/header", no_wrapper=True -%}
+{%- endblock -%}
+
+{%- block main -%}
+  <div class="ly_cont {{ widget_data.settings.sect1.ex_class }}">
+    {%- dnd_area "main", label="メインカラム" -%}
+      {%- dnd_section -%}
+      {%- end_dnd_section -%}
+    {%- end_dnd_area -%}
+  </div>
+  <!-- /.ly_cont -->
+{%- endblock -%}
+
+{%- block aside -%}
+  {%- dnd_area "aside", label="サイドカラム" -%}
+    {%- dnd_section -%}
+    {%- end_dnd_section -%}
+  {%- end_dnd_area -%}
+{%- endblock -%}
+
+{%- block footer -%}
+  {%- module "footer" path="/themename/modules/footer", no_wrapper=True -%}
+  {%- include '/themename/templates/partials/footer.html' -%}
+{%- endblock -%}

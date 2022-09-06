@@ -1,0 +1,5 @@
+@use './css/sass/config/_mixin' as *;
+
+.el_lv1Heading {
+  @include el_lv1Heading();
+}

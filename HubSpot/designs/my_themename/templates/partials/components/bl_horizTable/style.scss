@@ -1,0 +1,45 @@
+@use './css/sass/config/_mixin' as *;
+
+.bl_horizTable {
+  border: 1px solid #ddd;
+  @include MQ() {
+    overflow-x: auto;
+    border-right-width: 0;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    width: 20% !important;
+    padding: 15px;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color: #efefef;
+    border-bottom: 1px solid #ddd;
+  }
+
+  td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    @include MQ() {
+      border-right: 1px solid #ddd;
+    }
+  }
+
+  th,
+  td {
+    vertical-align: middle;
+    @include MQ() {
+      white-space: nowrap;
+    }
+  }
+
+  tr:last-child {
+    th,
+    td {
+      border-bottom-width: 0;
+    }
+  }
+}

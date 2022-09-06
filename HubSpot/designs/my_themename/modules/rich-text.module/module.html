@@ -1,0 +1,24 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/cook-cont.html" as cook_cont -%}
+{%- from "/themename/templates/partials/macros/handle-rich-text.html" import wrap_table_with_class, remove_table_style -%}
+
+{%- macro code() -%}
+  <div class="bl_wysiwyg {{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}">
+    {%- set cooked_cont = cook_cont.mcr(module.cont) -%}
+    {%- if
+      module.table_style != 'rich_text'
+      and module.remove_table_style
+    -%}
+      {%- set cooked_cont = remove_table_style(cooked_cont) -%}
+    {%- endif -%}
+
+    {%- if module.table_style == 'common' -%}
+      {%- import "/themename/templates/partials/components/bl_crossTable/index.html" as bl_crossTable -%}
+      {{ wrap_table_with_class(cooked_cont, 'bl_crossTable') }}
+    {%- else -%}
+      {{ cooked_cont }}
+    {%- endif -%}
+  </div>
+  <!-- /.bl_wysiwyg -->
+{%- endmacro -%}
+{{ code()|cut('\n')|regex_replace(' {2,}', ' ') }}

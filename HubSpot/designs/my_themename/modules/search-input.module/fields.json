@@ -1,0 +1,310 @@
+[
+  {
+    "id": "limit",
+    "name": "limit",
+    "label": "1ページあたりの表示件数",
+    "required": false,
+    "locked": false,
+    "display": "slider",
+    "min": 1,
+    "max": 100,
+    "step": 1,
+    "prefix": "",
+    "suffix": "",
+    "type": "number",
+    "default": 15,
+    "inline_help_text": "",
+    "help_text": ""
+  },
+  {
+    "id": "placeholder",
+    "name": "placeholder",
+    "label": "プレースホルダー",
+    "required": false,
+    "locked": false,
+    "validation_regex": "",
+    "allow_new_line": false,
+    "show_emoji_picker": false,
+    "type": "text",
+    "default": "検索したい語句を入力してください"
+  },
+  {
+    "id": "property",
+    "name": "property",
+    "label": "検索対象とする要素",
+    "type": "group",
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "property.title",
+        "name": "title",
+        "label": "&lt;title&gt;タグ",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true,
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "property.description",
+        "name": "description",
+        "label": "&lt;meta name=\"description\"&gt;タグ",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true,
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "property.author_full_name",
+        "name": "author_full_name",
+        "label": "著者名（ブログ記事のみ）",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true,
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "property.author_handle",
+        "name": "author_handle",
+        "label": "著者名のスラッグ（ブログ記事のみ）",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true,
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "property.tag",
+        "name": "tag",
+        "label": "タグ（ブログ記事のみ）",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true,
+        "inline_help_text": "",
+        "help_text": ""
+      },
+      {
+        "id": "property.html",
+        "name": "html",
+        "label": "全てのHTML要素",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": false,
+        "inline_help_text": "",
+        "help_text": "関連度の低いページも結果として表示されがちなため、基本的に推奨しません"
+      }
+    ]
+  },
+  {
+    "id": "target_strategy",
+    "name": "target_strategy",
+    "label": "検索対象",
+    "required": true,
+    "locked": false,
+    "display": "radio",
+    "choices": [
+      [
+        "blog",
+        "ブログのみ"
+      ],
+      [
+        "customize",
+        "複数のページタイプ"
+      ]
+    ],
+    "type": "choice",
+    "default": "customize",
+    "inline_help_text": "",
+    "help_text": ""
+  },
+  {
+    "id": "groupId",
+    "name": "groupId",
+    "label": "ブログの選択",
+    "required": false,
+    "locked": false,
+    "type": "blog",
+    "default": null,
+    "inline_help_text": "",
+    "help_text": "",
+    "occurrence": {
+      "min": null,
+      "max": null,
+      "sorting_label_field": "",
+      "default": null
+    },
+    "visibility": {
+      "controlling_field": "target_strategy",
+      "access": null,
+      "controlling_value_regex": "blog",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    }
+  },
+  {
+    "id": "type",
+    "name": "type",
+    "label": "検索対象とするページタイプ",
+    "required": false,
+    "locked": false,
+    "visibility": {
+      "controlling_field": "target_strategy",
+      "access": null,
+      "controlling_value_regex": "customize",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "id": "type.site_page",
+        "name": "site_page",
+        "label": "ウェブサイトページ",
+        "required": false,
+        "locked": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_value_regex": null,
+          "operator": "NOT_EMPTY",
+          "access": {
+            "operator": "HAS_ALL",
+            "scopes": [
+              "sitepages-access"
+            ]
+          },
+          "hidden_subfields": null
+        },
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "type.landing_page",
+        "name": "landing_page",
+        "label": "ランディングページ",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": false,
+        "help_text": "一般的には非推奨です（ランディングページはフォームの送信画面や、送信完了画面などコンテンツの少ないページが多いため）。検索対象としつつ送信完了画面などのみを除外したい場合は、robots.txtまたはmetaタグのnoindex設定を個別に行ってください。"
+      },
+      {
+        "id": "type.listing_page",
+        "name": "listing_page",
+        "label": "ブログトップ",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "type.blog_post",
+        "name": "blog_post",
+        "label": "ブログ記事",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "type.knowledge_article",
+        "name": "knowledge_article",
+        "label": "ナレッジベース",
+        "required": false,
+        "locked": false,
+        "visibility": {
+          "controlling_field": null,
+          "controlling_value_regex": null,
+          "operator": null,
+          "access": {
+            "operator": "HAS_ALL",
+            "scopes": [
+              "service-knowledge-access"
+            ]
+          },
+          "hidden_subfields": null
+        },
+        "type": "boolean",
+        "default": true
+      }
+    ],
+    "tab": "CONTENT",
+    "expanded": false,
+    "type": "group"
+  },
+  {
+    "id": "target_domains_and_paths",
+    "name": "target_domains_and_paths",
+    "label": "検索対象とするドメイン・第二階層パス",
+    "type": "group",
+    "inline_help_text": "",
+    "help_text": "空の場合、検索対象のページタイプのうちHubSpotでホスティングされている全てのドメイン・パスが対象となります",
+    "visibility": {
+      "controlling_field": "target_strategy",
+      "access": null,
+      "controlling_value_regex": "customize",
+      "hidden_subfields": null,
+      "operator": "EQUAL"
+    },
+    "children": [
+      {
+        "id": "target_domains_and_paths.domain",
+        "name": "domain",
+        "label": "ドメイン",
+        "help_text": "www.example.com など",
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "placeholder": "",
+        "allow_new_line": false,
+        "show_emoji_picker": false,
+        "type": "text",
+        "default": "",
+        "occurrence": {
+          "min": null,
+          "max": null,
+          "sorting_label_field": "",
+          "default": null
+        }
+      },
+      {
+        "id": "target_domains_and_paths.paths",
+        "name": "paths",
+        "label": "第二階層パス",
+        "help_text": "例えば「hubspot」と入力した場合、「/hubspot」や「/hubspot/pricing」は該当しますが、「/services/hubspot」は該当しません",
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "placeholder": "",
+        "allow_new_line": false,
+        "show_emoji_picker": false,
+        "type": "text",
+        "default": "",
+        "occurrence": {
+          "min": null,
+          "max": null,
+          "sorting_label_field": "",
+          "default": null
+        }
+      },
+      {
+        "id": "target_domains_and_paths.matchPrefix",
+        "name": "matchPrefix",
+        "label": "指定したパスで始まるページを検索対象とする",
+        "required": false,
+        "locked": false,
+        "type": "boolean",
+        "default": true,
+        "inline_help_text": "",
+        "help_text": "OFFにすると「指定パスで始まらないページを検索対象とする」という挙動になります。例えばパス指定を「hubspot」としチェックがOFFの場合、第二階層パスが「hubspot」で始まらないページが検索対象となります。"
+      }
+    ]
+  }
+]

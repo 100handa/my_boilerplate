@@ -1,0 +1,51 @@
+{%- import "/themename/templates/partials/macros/return-resized-img-elm.html" as resized_img -%}
+{#
+  {
+    root,
+    items: [
+      {
+        root,
+        img,
+        ttl,
+        txt
+      }
+    ]
+  }
+#}
+{%- macro code(data) -%}
+  <div class="bl_halfMediaUnit {{ data.root.class }}">
+    {%- for item in data.items -%}
+      <div class="bl_halfMedia {{ item.root.class }}">
+        <figure class="bl_halfMedia_imgWrapper">
+          {{ resized_img.mcr({
+            img: item.img
+          }) }}
+        </figure>
+        <div class="bl_halfMedia_body">
+          {%- if item.ttl.cont -%}
+            <{{ item.ttl.tag|default('p', true) }} class="bl_halfMedia_ttl">
+              {{ item.ttl.cont }}
+            </{{ item.ttl.tag|default('p', true) }}>
+          {%- endif -%}
+          {%- if item.txt.cont -%}
+            <div class="bl_halfMedia_txt {{ item.txt.class }}">
+              {{ item.txt.cont }}
+            </div>
+            <!-- /.bl_halfMedia_txt -->
+          {%- endif -%}
+        </div>
+        <!-- /.bl_halfMedia_body -->
+      </div>
+      <!-- /.bl_halfMedia bl_halfMedia__rev -->
+    {%- endfor -%}
+  </div>
+  <!-- /.bl_halfMediaUnit -->
+{%- endmacro -%}
+
+{%- macro mcr(data) -%}
+  {{- code(data)|cut('\n')|regex_replace(' {2,}', ' ') -}}
+{%- endmacro -%}
+
+{%- require_css -%}
+  <style>{%- include './style.css' -%}</style>
+{%- end_require_css -%}

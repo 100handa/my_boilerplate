@@ -1,0 +1,89 @@
+[
+  {
+    "name": "faqs",
+    "id": "faqs",
+    "label": "コンテンツ",
+    "occurrence": {
+      "default": 2,
+      "min": 1,
+      "max": null,
+      "sorting_label_field": "faqs.q"
+    },
+    "locked": false,
+    "type": "group",
+    "required": false,
+    "tab": "CONTENT",
+    "default": [
+    ],
+    "children": [
+      {
+        "id": "faqs.q",
+        "name": "q",
+        "label": "質問",
+        "required": false,
+        "locked": false,
+        "validation_regex": "",
+        "allow_new_line": true,
+        "show_emoji_picker": true,
+        "type": "text",
+        "default": "質問が入ります",
+        "placeholder": "",
+        "inline_help_text": "SP時のみの改行：&lt;br class=\"md_only\"&gt;<br>PC時のみの改行：&lt;br class=\"lg_only\"&gt;",
+        "help_text": ""
+      },
+      {
+        "id": "faqs.a",
+        "name": "a",
+        "label": "回答",
+        "required": false,
+        "locked": false,
+        "type": "richtext",
+        "default": "<p>テキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入りますテキストが入ります</p>",
+        "inline_help_text": "",
+        "help_text": ""
+      }
+    ]
+  },
+  {
+    "id": "styles",
+    "name": "styles",
+    "label": "スタイル",
+    "type": "group",
+    "tab": "STYLE",
+    "expanded": false,
+    "inline_help_text": "",
+    "help_text": "",
+    "children": [
+      {
+        "id": "styles.mt_lg",
+        "name": "mt_lg",
+        "label": "上部の余白",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 60,
+        "help_text": ""
+      },
+      {
+        "id": "styles.mt_md",
+        "name": "mt_md",
+        "label": "上部の余白（SP時上書き用）",
+        "sortable": false,
+        "required": false,
+        "locked": false,
+        "display": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "type": "number",
+        "default": 40,
+        "help_text": ""
+      }
+    ]
+  }
+]

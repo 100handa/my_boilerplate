@@ -1,0 +1,25 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: false
+-->
+{%- import "/themename/templates/partials/macros/return-tag-obj.html" as return_tag_obj -%}
+{%- import "/themename/templates/partials/components/bl_vertPosts/index.html" as bl_vertPosts -%}
+
+<h2 class="el_lv3Heading">人気の記事</h2>
+{%- set pop_posts = [] -%}
+  {%- for cont in blog_popular_posts('default', 5) -%}
+    {%- set tags = return_tag_obj.mcr('', cont.topic_list)|fromjson -%}
+    {%- do pop_posts.append({
+      date: {
+        cont: cont.publish_date_localized
+      },
+      tags: tags,
+      link: {
+        href: cont.absolute_url,
+        cont: cont.name
+      }
+    }) -%}
+  {%- endfor -%}
+  {{ bl_vertPosts.mcr({
+    items: pop_posts
+  }) }}

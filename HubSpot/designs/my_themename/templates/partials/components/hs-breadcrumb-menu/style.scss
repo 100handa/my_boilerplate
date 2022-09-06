@@ -1,0 +1,48 @@
+@use './css/sass/config/_var' as *;
+@use './css/sass/config/_mixin' as *;
+@use './css/sass/config/_function' as *;
+
+.hs-breadcrumb-menu {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: pxToRem(12);
+  @include MQ(m) {
+    margin-top: 10px;
+    font-size: pxToRem(10);
+  }
+}
+
+.hs-breadcrumb-menu-item {
+  float: none;
+  padding: 0;
+}
+
+.hs-breadcrumb-menu-divider:before {
+  padding: 0;
+  margin-right: 15px;
+  margin-left: 15px;
+  content: '>';
+}
+
+a.hs-breadcrumb-label {
+  color: inherit;
+  text-decoration: none;
+
+  @include FH() {
+    text-decoration: underline;
+  }
+
+  &[href^='javascript'] {
+    display: none;
+
+    + span {
+      display: none;
+    }
+  }
+}
+
+span.hs-breadcrumb-label {
+  color: $c_theme;
+}

@@ -1,0 +1,17 @@
+{%- import "/themename/templates/partials/macros/module-spacer.html" as mt -%}
+{%- import "/themename/templates/partials/macros/convert-line-break-to-br.html" as br -%}
+{%- import '/themename/templates/partials/components/el_lv1Heading/index.html'
+  as el_lv1Heading
+-%}
+{%- set ttl = br.mcr(module.ttl) -%}
+
+{{
+  el_lv1Heading.mcr({
+    root: {
+      class: '{{ mt.mcr(module.styles.mt_lg, module.styles.mt_md) }}',
+    },
+    ttl: {
+      cont: ttl
+    }
+  })
+}}
